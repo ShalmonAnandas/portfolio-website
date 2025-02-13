@@ -12,6 +12,7 @@ dependencies:
   scroll_animator: ^0.3.0
   google_fonts: ^6.2.1
   lottie: ^3.3.1
+  flutter_native_splash: ^2.4.4
 
 dev_dependencies:
   flutter_test:
@@ -23,3 +24,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/animations/
+
+flutter_native_splash:
+  color: "#2b3537"
+  image: assets/animations/loader_transparent.gif
