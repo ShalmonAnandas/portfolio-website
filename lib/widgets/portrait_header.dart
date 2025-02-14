@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_website/utils/assets.dart';
-import 'package:portfolio_website/utils/colors.dart';
 import 'package:portfolio_website/utils/static_text.dart';
 
 class PortraitHeader extends StatelessWidget {
@@ -8,10 +7,12 @@ class PortraitHeader extends StatelessWidget {
     super.key,
     required this.height,
     required this.width,
+    required this.headerColor,
   });
 
   final double height;
   final double width;
+  final Color headerColor;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class PortraitHeader extends StatelessWidget {
                     Assets.drawerIcon,
                     width: 32,
                     height: 32,
-                    color: context.customColors.dutchWhite,
+                    color: headerColor,
                   ),
                 ),
               ),
@@ -45,7 +46,7 @@ class PortraitHeader extends StatelessWidget {
             child: Text(
               StaticText.shalmonAnandas,
               style: TextStyle(
-                color: context.customColors.dutchWhite,
+                color: headerColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 32,
               ),

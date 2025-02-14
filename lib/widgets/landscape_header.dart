@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio_website/utils/colors.dart';
 import 'package:portfolio_website/utils/static_text.dart';
 
 class LandscapeHeader extends StatelessWidget {
@@ -8,11 +7,13 @@ class LandscapeHeader extends StatelessWidget {
     required this.height,
     required this.width,
     required this.ctaList,
+    required this.headerColor,
   });
 
   final double height;
   final double width;
   final List<Widget> ctaList;
+  final Color headerColor;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class LandscapeHeader extends StatelessWidget {
             child: Text(
               StaticText.shalmonAnandas,
               style: TextStyle(
-                color: context.customColors.dutchWhite,
+                color: headerColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 32,
               ),
