@@ -18,6 +18,8 @@ class ProjectsSection extends StatelessWidget {
     String? liveUrl,
     required int stars,
     required int delay,
+    required IconData icon,
+    required Color iconColor,
   }) {
     return SlideInLeft(
       config: BaseAnimationConfig(
@@ -41,6 +43,19 @@ class ProjectsSection extends StatelessWidget {
             children: [
               Row(
                 children: [
+                  Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: iconColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Icon(
+                      icon,
+                      color: iconColor,
+                      size: 24,
+                    ),
+                  ),
+                  SizedBox(width: 16),
                   Expanded(
                     child: Text(
                       title,
@@ -223,6 +238,8 @@ class ProjectsSection extends StatelessWidget {
                     githubUrl: "https://github.com/ShalmonAnandas/GUI-YouTube-Downloader",
                     stars: 120,
                     delay: 600,
+                    icon: Icons.download,
+                    iconColor: Colors.red,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -232,6 +249,8 @@ class ProjectsSection extends StatelessWidget {
                     githubUrl: "https://github.com/ShalmonAnandas/books-api",
                     stars: 15,
                     delay: 800,
+                    icon: Icons.menu_book,
+                    iconColor: Colors.blue,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -242,6 +261,8 @@ class ProjectsSection extends StatelessWidget {
                     liveUrl: "https://floating-point-demo.vercel.app",
                     stars: 8,
                     delay: 1000,
+                    icon: Icons.calculate,
+                    iconColor: Colors.purple,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -251,6 +272,8 @@ class ProjectsSection extends StatelessWidget {
                     githubUrl: "https://github.com/ShalmonAnandas/movie-app",
                     stars: 25,
                     delay: 1200,
+                    icon: Icons.movie,
+                    iconColor: Colors.orange,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -261,6 +284,8 @@ class ProjectsSection extends StatelessWidget {
                     liveUrl: "https://shalmon-games.vercel.app",
                     stars: 12,
                     delay: 1400,
+                    icon: Icons.sports_esports,
+                    iconColor: Colors.green,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -271,6 +296,8 @@ class ProjectsSection extends StatelessWidget {
                     liveUrl: "https://emotions-and-tech-tips.vercel.app",
                     stars: 5,
                     delay: 1600,
+                    icon: Icons.article,
+                    iconColor: Colors.teal,
                   ),
                 ],
               ),

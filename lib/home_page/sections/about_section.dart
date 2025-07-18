@@ -60,6 +60,40 @@ class AboutSection extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Profile Image Placeholder
+            SlideInLeft(
+              config: BaseAnimationConfig(
+                delay: 100.ms,
+                child: Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        context.customColors.gunMetal,
+                        context.customColors.cadetGrey,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 20,
+                        offset: Offset(0, 10),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.person,
+                    size: 60,
+                    color: context.customColors.dutchWhite,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 24),
             SlideInLeft(
               config: BaseAnimationConfig(
                 delay: 200.ms,

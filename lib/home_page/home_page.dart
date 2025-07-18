@@ -242,12 +242,18 @@ class HomePageBackground extends StatelessWidget {
             color: Colors.black,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 StaticText.scrollDown,
                 style: TextStyle(
                     color: context.customColors.dutchWhite, fontSize: 16),
+              ),
+              SizedBox(height: 8),
+              Text(
+                "Discover more about me",
+                style: TextStyle(
+                    color: context.customColors.dutchWhite.withOpacity(0.7), fontSize: 14),
               ),
               Lottie.asset(
                 Assets.scrollDownAnim,

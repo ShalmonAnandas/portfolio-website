@@ -44,6 +44,21 @@ class WorkExperienceSection extends StatelessWidget {
             children: [
               Row(
                 children: [
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: isLatest 
+                          ? context.customColors.dutchWhite.withOpacity(0.2) 
+                          : context.customColors.gunMetal.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.work,
+                      color: isLatest ? context.customColors.dutchWhite : context.customColors.gunMetal,
+                      size: 20,
+                    ),
+                  ),
+                  SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,31 +228,50 @@ class WorkExperienceSection extends StatelessWidget {
             color: context.customColors.cadetGrey.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
             children: [
-              Text(
-                degree,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+              Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: context.customColors.gunMetal.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.school,
                   color: context.customColors.gunMetal,
+                  size: 20,
                 ),
               ),
-              SizedBox(height: 4),
-              Text(
-                institution,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: context.customColors.cadetGrey,
-                ),
-              ),
-              SizedBox(height: 8),
-              Text(
-                period,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: context.customColors.cadetGrey,
+              SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      degree,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: context.customColors.gunMetal,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      institution,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: context.customColors.cadetGrey,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      period,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: context.customColors.cadetGrey,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
