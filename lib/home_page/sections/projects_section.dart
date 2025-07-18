@@ -9,6 +9,30 @@ class ProjectsSection extends StatelessWidget {
   final double height;
   final double width;
 
+  // Helper function to get randomized animation based on index
+  Widget _getRandomAnimation({
+    required int index,
+    required int delay,
+    required Widget child,
+  }) {
+    final animations = [
+      // Index 0: FadeIn
+      FadeIn(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      // Index 1: SlideInRight
+      SlideInRight(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      // Index 2: SlideInLeft
+      SlideInLeft(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      // Index 3: FadeInUp
+      FadeInUp(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      // Index 4: SlideInUp
+      SlideInUp(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      // Index 5: FadeInDown
+      FadeInDown(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+    ];
+    
+    return animations[index % animations.length];
+  }
+
   Widget _buildProjectCard({
     required BuildContext context,
     required String title,
@@ -20,24 +44,25 @@ class ProjectsSection extends StatelessWidget {
     required int delay,
     required IconData icon,
     required Color iconColor,
+    required int index,
   }) {
-    return SlideInLeft(
-      config: BaseAnimationConfig(
-        delay: Duration(milliseconds: delay),
-        child: Container(
-          margin: EdgeInsets.only(bottom: 24),
-          padding: EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
+    return _getRandomAnimation(
+      index: index,
+      delay: delay,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 24),
+        padding: EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 15,
+              offset: Offset(0, 8),
+            ),
+          ],
+        ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -60,9 +85,10 @@ class ProjectsSection extends StatelessWidget {
                     child: Text(
                       title,
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
                         color: context.customColors.gunMetal,
+                        letterSpacing: -0.3,
                       ),
                     ),
                   ),
@@ -87,7 +113,8 @@ class ProjectsSection extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.black87,
-                  height: 1.5,
+                  height: 1.6,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               SizedBox(height: 16),
@@ -197,28 +224,30 @@ class ProjectsSection extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
         child: Column(
           children: [
-            SlideInLeft(
+            FadeIn(
               config: BaseAnimationConfig(
                 delay: 200.ms,
                 child: Text(
                   "My Projects",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 42,
                     color: context.customColors.gunMetal,
+                    letterSpacing: -0.5,
                   ),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
             SizedBox(height: 16),
-            SlideInLeft(
+            SlideInUp(
               config: BaseAnimationConfig(
                 delay: 400.ms,
                 child: Text(
                   "A showcase of my favorite projects and contributions",
                   style: TextStyle(
                     fontSize: 18,
+                    fontWeight: FontWeight.w500,
                     color: context.customColors.cadetGrey,
                   ),
                   textAlign: TextAlign.center,
@@ -240,6 +269,7 @@ class ProjectsSection extends StatelessWidget {
                     delay: 600,
                     icon: Icons.download,
                     iconColor: Colors.red,
+                    index: 0,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -248,9 +278,10 @@ class ProjectsSection extends StatelessWidget {
                     technologies: ["Python", "FastAPI", "SQLAlchemy", "PostgreSQL"],
                     githubUrl: "https://github.com/ShalmonAnandas/books-api",
                     stars: 15,
-                    delay: 800,
+                    delay: 700,
                     icon: Icons.menu_book,
                     iconColor: Colors.blue,
+                    index: 1,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -260,9 +291,10 @@ class ProjectsSection extends StatelessWidget {
                     githubUrl: "https://github.com/ShalmonAnandas/0.1-0.2-0.3",
                     liveUrl: "https://floating-point-demo.vercel.app",
                     stars: 8,
-                    delay: 1000,
+                    delay: 800,
                     icon: Icons.calculate,
                     iconColor: Colors.purple,
+                    index: 2,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -271,9 +303,10 @@ class ProjectsSection extends StatelessWidget {
                     technologies: ["Flutter", "Dart", "REST API", "Mobile"],
                     githubUrl: "https://github.com/ShalmonAnandas/movie-app",
                     stars: 25,
-                    delay: 1200,
+                    delay: 900,
                     icon: Icons.movie,
                     iconColor: Colors.orange,
+                    index: 3,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -283,9 +316,10 @@ class ProjectsSection extends StatelessWidget {
                     githubUrl: "https://github.com/ShalmonAnandas/interactive-games",
                     liveUrl: "https://shalmon-games.vercel.app",
                     stars: 12,
-                    delay: 1400,
+                    delay: 1000,
                     icon: Icons.sports_esports,
                     iconColor: Colors.green,
+                    index: 4,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -295,9 +329,10 @@ class ProjectsSection extends StatelessWidget {
                     githubUrl: "https://github.com/ShalmonAnandas/emotions-and-tech-tips",
                     liveUrl: "https://emotions-and-tech-tips.vercel.app",
                     stars: 5,
-                    delay: 1600,
+                    delay: 1100,
                     icon: Icons.article,
                     iconColor: Colors.teal,
+                    index: 5,
                   ),
                 ],
               ),

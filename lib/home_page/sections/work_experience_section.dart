@@ -8,6 +8,26 @@ class WorkExperienceSection extends StatelessWidget {
   final double height;
   final double width;
 
+  // Helper function to get randomized animation based on index
+  Widget _getRandomAnimation({
+    required int index,
+    required int delay,
+    required Widget child,
+  }) {
+    final animations = [
+      // Index 0: FadeInUp
+      FadeInUp(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      // Index 1: SlideInLeft
+      SlideInLeft(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      // Index 2: SlideInRight
+      SlideInRight(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      // Index 3: FadeIn
+      FadeIn(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+    ];
+    
+    return animations[index % animations.length];
+  }
+
   Widget _buildExperienceCard({
     required BuildContext context,
     required String title,
@@ -20,11 +40,12 @@ class WorkExperienceSection extends StatelessWidget {
     String? note,
     required int delay,
     required bool isLatest,
+    required int index,
   }) {
-    return SlideInLeft(
-      config: BaseAnimationConfig(
-        delay: Duration(milliseconds: delay),
-        child: Container(
+    return _getRandomAnimation(
+      index: index,
+      delay: delay,
+      child: Container(
           margin: EdgeInsets.only(bottom: 24),
           padding: EdgeInsets.all(24),
           decoration: BoxDecoration(
@@ -217,11 +238,12 @@ class WorkExperienceSection extends StatelessWidget {
     required String institution,
     required String period,
     required int delay,
+    required int index,
   }) {
-    return SlideInLeft(
-      config: BaseAnimationConfig(
-        delay: Duration(milliseconds: delay),
-        child: Container(
+    return _getRandomAnimation(
+      index: index,
+      delay: delay,
+      child: Container(
           margin: EdgeInsets.only(bottom: 16),
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
@@ -290,28 +312,30 @@ class WorkExperienceSection extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
         child: Column(
           children: [
-            SlideInLeft(
+            FadeIn(
               config: BaseAnimationConfig(
                 delay: 200.ms,
                 child: Text(
                   "My Work Experience",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 42,
                     color: context.customColors.gunMetal,
+                    letterSpacing: -0.5,
                   ),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
             SizedBox(height: 16),
-            SlideInLeft(
+            SlideInUp(
               config: BaseAnimationConfig(
                 delay: 400.ms,
                 child: Text(
                   "Professional journey and career milestones",
                   style: TextStyle(
                     fontSize: 18,
+                    fontWeight: FontWeight.w500,
                     color: context.customColors.cadetGrey,
                   ),
                   textAlign: TextAlign.center,
@@ -328,9 +352,10 @@ class WorkExperienceSection extends StatelessWidget {
                   Text(
                     "Professional Experience",
                     style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700,
                       color: context.customColors.gunMetal,
+                      letterSpacing: -0.3,
                     ),
                   ),
                   SizedBox(height: 24),
@@ -345,6 +370,7 @@ class WorkExperienceSection extends StatelessWidget {
                     skills: ["Flutter", "Dart", "Mobile Development"],
                     delay: 600,
                     isLatest: true,
+                    index: 0,
                   ),
                   _buildExperienceCard(
                     context: context,
@@ -356,8 +382,9 @@ class WorkExperienceSection extends StatelessWidget {
                     type: "Full-time • On-site",
                     skills: ["Software Development", "Team Leadership"],
                     note: "Working at Snapwork Technologies as a deputed developer on behalf of Puretech.",
-                    delay: 800,
+                    delay: 700,
                     isLatest: false,
+                    index: 1,
                   ),
                   _buildExperienceCard(
                     context: context,
@@ -368,8 +395,9 @@ class WorkExperienceSection extends StatelessWidget {
                     location: "Borivali, Maharashtra, India",
                     type: "Full-time • On-site",
                     skills: ["Red Hat Enterprise Linux (RHEL)", "Linux System Administration"],
-                    delay: 1000,
+                    delay: 800,
                     isLatest: false,
+                    index: 2,
                   ),
                   _buildExperienceCard(
                     context: context,
@@ -380,8 +408,9 @@ class WorkExperienceSection extends StatelessWidget {
                     location: "Mumbai, Maharashtra, India",
                     type: "Internship",
                     skills: ["Python (Programming Language)", "Logical Volume Manager (LVM)"],
-                    delay: 1200,
+                    delay: 900,
                     isLatest: false,
+                    index: 3,
                   ),
                   
                   SizedBox(height: 48),
@@ -390,9 +419,10 @@ class WorkExperienceSection extends StatelessWidget {
                   Text(
                     "Education",
                     style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w700,
                       color: context.customColors.gunMetal,
+                      letterSpacing: -0.3,
                     ),
                   ),
                   SizedBox(height: 24),
@@ -401,14 +431,16 @@ class WorkExperienceSection extends StatelessWidget {
                     degree: "Master of Science in Computer Science",
                     institution: "University of Mumbai",
                     period: "2021 - 2023",
-                    delay: 1400,
+                    delay: 1000,
+                    index: 0,
                   ),
                   _buildEducationCard(
                     context: context,
                     degree: "Bachelor of Science in Computer Science",
                     institution: "University of Mumbai",
                     period: "2018 - 2021",
-                    delay: 1600,
+                    delay: 1100,
+                    index: 1,
                   ),
                 ],
               ),

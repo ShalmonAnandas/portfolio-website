@@ -10,7 +10,6 @@ import 'package:portfolio_website/utils/static_text.dart';
 import 'package:portfolio_website/widgets/landscape_header.dart';
 import 'package:portfolio_website/widgets/portrait_header.dart';
 import 'package:qlevar_router/qlevar_router.dart';
-import 'package:scroll_animator/scroll_animator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../utils/colors.dart';
 
@@ -97,7 +96,7 @@ class _HomePageState extends State<HomePage> {
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       child: GestureDetector(
-        onTap: () => QR.popUntilOrPush('/contact'),
+        onTap: () => _launchExternalContact(),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Container(
@@ -123,9 +122,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _scrollController = AnimatedScrollController(
-      animationFactory: const ChromiumImpulse(),
-    );
+    _scrollController = ScrollController();
   }
 
   void _scrollToSection(GlobalKey key) {
@@ -141,6 +138,13 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _launchExternalBlog() async {
     final Uri url = Uri.parse('https://www.shalmon.blog/');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    }
+  }
+
+  Future<void> _launchExternalContact() async {
+    final Uri url = Uri.parse('mailto:shalmon@example.com');
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     }

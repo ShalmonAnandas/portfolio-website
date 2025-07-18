@@ -10,16 +10,24 @@ class AboutSection extends StatelessWidget {
 
   Widget _buildSkillChip(BuildContext context, String skill) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
       decoration: BoxDecoration(
         color: context.customColors.gunMetal,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(25),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: Offset(0, 2),
+          ),
+        ],
       ),
       child: Text(
         skill,
         style: TextStyle(
           color: context.customColors.dutchWhite,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
+          fontSize: 14,
         ),
       ),
     );
@@ -31,15 +39,18 @@ class AboutSection extends StatelessWidget {
         Text(
           number,
           style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
+            fontSize: 32,
+            fontWeight: FontWeight.w900,
             color: context.customColors.gunMetal,
+            letterSpacing: -1,
           ),
         ),
+        SizedBox(height: 4),
         Text(
           label,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
             color: context.customColors.cadetGrey,
           ),
         ),
@@ -61,7 +72,7 @@ class AboutSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Profile Image Placeholder
-            SlideInLeft(
+            FadeInUp(
               config: BaseAnimationConfig(
                 delay: 100.ms,
                 child: Container(
@@ -94,40 +105,42 @@ class AboutSection extends StatelessWidget {
               ),
             ),
             SizedBox(height: 24),
-            SlideInLeft(
+            FadeIn(
               config: BaseAnimationConfig(
                 delay: 200.ms,
                 child: Text(
                   "About Me",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                      color: Colors.black),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 42,
+                      color: Colors.black,
+                      letterSpacing: -0.5),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
             SizedBox(height: 32),
-            SlideInLeft(
+            SlideInRight(
               config: BaseAnimationConfig(
-                delay: 600.ms,
+                delay: 400.ms,
                 child: Container(
                   constraints: BoxConstraints(maxWidth: 800),
                   child: Text(
                     "I'm a passionate software developer with a Master's degree in Computer Science, specializing in full-stack development, mobile applications, and API design. With expertise in Python, Dart/Flutter, JavaScript, and C++, I love creating innovative solutions that solve real-world problems.\n\nMy journey in technology spans across diverse projects from GUI applications and web development to bioinformatics tools and interactive games. I'm particularly interested in creating user-friendly applications that bridge the gap between complex technology and everyday users.",
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 17,
                         color: Colors.black87,
-                        height: 1.6),
+                        height: 1.7,
+                        fontWeight: FontWeight.w400),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
             ),
             SizedBox(height: 40),
-            SlideInLeft(
+            FadeInUp(
               config: BaseAnimationConfig(
-                delay: 800.ms,
+                delay: 600.ms,
                 child: Wrap(
                   alignment: WrapAlignment.center,
                   spacing: 16,
@@ -150,9 +163,9 @@ class AboutSection extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40),
-            SlideInLeft(
+            SlideInUp(
               config: BaseAnimationConfig(
-                delay: 1000.ms,
+                delay: 800.ms,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

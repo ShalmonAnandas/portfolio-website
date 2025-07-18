@@ -16,7 +16,38 @@ class MainApp extends StatelessWidget {
     var baseTheme = ThemeData(brightness: brightness);
 
     return baseTheme.copyWith(
-      textTheme: GoogleFonts.quicksandTextTheme(baseTheme.textTheme),
+      textTheme: GoogleFonts.quicksandTextTheme(baseTheme.textTheme).copyWith(
+        // Use Poppins for headings
+        headlineLarge: GoogleFonts.poppins(
+          fontSize: 42,
+          fontWeight: FontWeight.w800,
+          letterSpacing: -0.5,
+        ),
+        headlineMedium: GoogleFonts.poppins(
+          fontSize: 32,
+          fontWeight: FontWeight.w700,
+          letterSpacing: -0.3,
+        ),
+        headlineSmall: GoogleFonts.poppins(
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+        ),
+        // Use Inter for body text
+        bodyLarge: GoogleFonts.inter(
+          fontSize: 17,
+          fontWeight: FontWeight.w400,
+          height: 1.7,
+        ),
+        bodyMedium: GoogleFonts.inter(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          height: 1.6,
+        ),
+        bodySmall: GoogleFonts.inter(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
     );
   }
 
