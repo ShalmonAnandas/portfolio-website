@@ -43,52 +43,64 @@ class _ContactPageState extends State<ContactPage> {
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.aboutMe,
-          style: TextStyle(
-            color: context.customColors.gunMetal,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/aboutme'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.aboutMe,
+            style: TextStyle(
+              color: context.customColors.gunMetal,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.myProjects,
-          style: TextStyle(
-            color: context.customColors.gunMetal,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/projects'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.myProjects,
+            style: TextStyle(
+              color: context.customColors.gunMetal,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.resume,
-          style: TextStyle(
-            color: context.customColors.gunMetal,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/resume'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.resume,
+            style: TextStyle(
+              color: context.customColors.gunMetal,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.blog,
-          style: TextStyle(
-            color: context.customColors.gunMetal,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/blog'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.blog,
+            style: TextStyle(
+              color: context.customColors.gunMetal,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
