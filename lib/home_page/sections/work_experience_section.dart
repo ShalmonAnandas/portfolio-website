@@ -49,14 +49,29 @@ class WorkExperienceSection extends StatelessWidget {
           margin: EdgeInsets.only(bottom: 24),
           padding: EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: isLatest ? context.customColors.gunMetal : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            border: isLatest ? null : Border.all(color: context.customColors.gunMetal.withOpacity(0.2)),
+            gradient: isLatest 
+                ? LinearGradient(
+                    colors: [
+                      context.customColors.gunMetal,
+                      context.customColors.gunMetal.withOpacity(0.9),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
+            color: isLatest ? null : Colors.white,
+            borderRadius: BorderRadius.circular(18),
+            border: isLatest ? null : Border.all(
+              color: context.customColors.gunMetal.withOpacity(0.15),
+              width: 1.5,
+            ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-                offset: Offset(0, 4),
+                color: isLatest 
+                    ? context.customColors.gunMetal.withOpacity(0.25)
+                    : Colors.black.withOpacity(0.08),
+                blurRadius: isLatest ? 20 : 12,
+                offset: Offset(0, isLatest ? 8 : 4),
               ),
             ],
           ),
@@ -87,12 +102,13 @@ class WorkExperienceSection extends StatelessWidget {
                         Text(
                           title,
                           style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
                             color: isLatest ? context.customColors.dutchWhite : context.customColors.gunMetal,
+                            letterSpacing: -0.3,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        SizedBox(height: 6),
                         Text(
                           company,
                           style: TextStyle(
@@ -202,22 +218,31 @@ class WorkExperienceSection extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 Wrap(
-                  spacing: 8,
+                  spacing: 10,
                   runSpacing: 8,
                   children: skills
                       .map((skill) => Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
                               color: isLatest 
                                   ? context.customColors.dutchWhite.withOpacity(0.2) 
-                                  : context.customColors.gunMetal.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
+                                  : context.customColors.gunMetal.withOpacity(0.08),
+                              borderRadius: BorderRadius.circular(12),
+                              border: isLatest 
+                                  ? Border.all(
+                                      color: context.customColors.dutchWhite.withOpacity(0.3),
+                                      width: 0.5,
+                                    )
+                                  : Border.all(
+                                      color: context.customColors.gunMetal.withOpacity(0.2),
+                                      width: 0.5,
+                                    ),
                             ),
                             child: Text(
                               skill,
                               style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
                                 color: isLatest ? context.customColors.dutchWhite : context.customColors.gunMetal,
                               ),
                             ),
@@ -247,8 +272,26 @@ class WorkExperienceSection extends StatelessWidget {
           margin: EdgeInsets.only(bottom: 16),
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: context.customColors.cadetGrey.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
+            gradient: LinearGradient(
+              colors: [
+                context.customColors.cadetGrey.withOpacity(0.08),
+                context.customColors.cadetGrey.withOpacity(0.15),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: context.customColors.cadetGrey.withOpacity(0.2),
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 8,
+                offset: Offset(0, 3),
+              ),
+            ],
           ),
           child: Row(
             children: [

@@ -119,20 +119,31 @@ class ProjectsSection extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Wrap(
-                spacing: 8,
+                spacing: 10,
                 runSpacing: 8,
                 children: technologies
                     .map((tech) => Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                           decoration: BoxDecoration(
-                            color: context.customColors.cadetGrey.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(12),
+                            gradient: LinearGradient(
+                              colors: [
+                                context.customColors.cadetGrey.withOpacity(0.15),
+                                context.customColors.cadetGrey.withOpacity(0.25),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: context.customColors.cadetGrey.withOpacity(0.3),
+                              width: 0.5,
+                            ),
                           ),
                           child: Text(
                             tech,
                             style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
                               color: context.customColors.gunMetal,
                             ),
                           ),
@@ -147,10 +158,24 @@ class ProjectsSection extends StatelessWidget {
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                         decoration: BoxDecoration(
-                          color: context.customColors.gunMetal,
-                          borderRadius: BorderRadius.circular(8),
+                          gradient: LinearGradient(
+                            colors: [
+                              context.customColors.gunMetal,
+                              context.customColors.gunMetal.withOpacity(0.8),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: context.customColors.gunMetal.withOpacity(0.3),
+                              blurRadius: 8,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -161,7 +186,8 @@ class ProjectsSection extends StatelessWidget {
                               'GitHub',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
                               ),
                             ),
                           ],
@@ -176,10 +202,14 @@ class ProjectsSection extends StatelessWidget {
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                           decoration: BoxDecoration(
-                            border: Border.all(color: context.customColors.gunMetal),
-                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: context.customColors.gunMetal,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.transparent,
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -190,7 +220,8 @@ class ProjectsSection extends StatelessWidget {
                                 'Live Demo',
                                 style: TextStyle(
                                   color: context.customColors.gunMetal,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
                                 ),
                               ),
                             ],
