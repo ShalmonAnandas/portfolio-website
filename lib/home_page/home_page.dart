@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       child: InkWell(
-        onTap: () => QR.popUntilOrPush(AboutMePage.routeName),
+        onTap: () => QR.popUntilOrPush('/aboutme'),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Text(
@@ -41,39 +41,48 @@ class _HomePageState extends State<HomePage> {
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.resume,
-          style: TextStyle(
-            color: context.customColors.dutchWhite,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/resume'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.resume,
+            style: TextStyle(
+              color: context.customColors.dutchWhite,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.myProjects,
-          style: TextStyle(
-            color: context.customColors.dutchWhite,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/projects'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.myProjects,
+            style: TextStyle(
+              color: context.customColors.dutchWhite,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.blog,
-          style: TextStyle(
-            color: context.customColors.dutchWhite,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/blog'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.blog,
+            style: TextStyle(
+              color: context.customColors.dutchWhite,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
@@ -81,7 +90,7 @@ class _HomePageState extends State<HomePage> {
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       child: GestureDetector(
-        onTap: () => print("Shalmon"),
+        onTap: () => QR.popUntilOrPush('/contact'),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Container(

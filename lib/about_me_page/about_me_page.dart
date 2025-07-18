@@ -40,39 +40,48 @@ class _AboutMePageState extends State<AboutMePage> {
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.resume,
-          style: TextStyle(
-            color: context.customColors.gunMetal,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/resume'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.resume,
+            style: TextStyle(
+              color: context.customColors.gunMetal,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.myProjects,
-          style: TextStyle(
-            color: context.customColors.gunMetal,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/projects'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.myProjects,
+            style: TextStyle(
+              color: context.customColors.gunMetal,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.blog,
-          style: TextStyle(
-            color: context.customColors.gunMetal,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => QR.popUntilOrPush('/blog'),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.blog,
+            style: TextStyle(
+              color: context.customColors.gunMetal,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
@@ -80,7 +89,7 @@ class _AboutMePageState extends State<AboutMePage> {
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       child: GestureDetector(
-        onTap: () => print("Shalmon"),
+        onTap: () => QR.popUntilOrPush('/contact'),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Container(
@@ -120,6 +129,45 @@ class _AboutMePageState extends State<AboutMePage> {
     super.initState();
   }
 
+  Widget _buildSkillChip(String skill) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: context.customColors.gunMetal,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        skill,
+        style: TextStyle(
+          color: context.customColors.dutchWhite,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildExperienceCard(String number, String label) {
+    return Column(
+      children: [
+        Text(
+          number,
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: context.customColors.gunMetal,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            color: context.customColors.cadetGrey,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -148,15 +196,97 @@ class _AboutMePageState extends State<AboutMePage> {
                       width: width,
                       headerColor: context.customColors.gunMetal,
                     ),
-              SlideInLeft(
-                config: BaseAnimationConfig(
-                  delay: 200.ms,
-                  child: Text(
-                    "Hi Im Shalmon",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                        color: Colors.black),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Column(
+                    children: [
+                      SlideInLeft(
+                        config: BaseAnimationConfig(
+                          delay: 200.ms,
+                          child: Text(
+                            "Hi, I'm Shalmon Anandas",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40,
+                                color: Colors.black),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 24),
+                      SlideInLeft(
+                        config: BaseAnimationConfig(
+                          delay: 400.ms,
+                          child: Text(
+                            "Software Developer & Computer Science Graduate",
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: context.customColors.cadetGrey,
+                                fontWeight: FontWeight.w500),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 32),
+                      SlideInLeft(
+                        config: BaseAnimationConfig(
+                          delay: 600.ms,
+                          child: Container(
+                            constraints: BoxConstraints(maxWidth: 800),
+                            child: Text(
+                              "I'm a passionate software developer with a Master's degree in Computer Science, specializing in full-stack development, mobile applications, and API design. With expertise in Python, Dart/Flutter, JavaScript, and C++, I love creating innovative solutions that solve real-world problems.\n\nMy journey in technology spans across diverse projects from GUI applications and web development to bioinformatics tools and interactive games. I'm particularly interested in creating user-friendly applications that bridge the gap between complex technology and everyday users.",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black87,
+                                  height: 1.6),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                      SlideInLeft(
+                        config: BaseAnimationConfig(
+                          delay: 800.ms,
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 16,
+                            runSpacing: 12,
+                            children: [
+                              _buildSkillChip("Python"),
+                              _buildSkillChip("Dart/Flutter"),
+                              _buildSkillChip("JavaScript"),
+                              _buildSkillChip("TypeScript"),
+                              _buildSkillChip("C++"),
+                              _buildSkillChip("Java"),
+                              _buildSkillChip("FastAPI"),
+                              _buildSkillChip("React"),
+                              _buildSkillChip("Node.js"),
+                              _buildSkillChip("Git"),
+                              _buildSkillChip("Linux"),
+                              _buildSkillChip("Docker"),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                      SlideInLeft(
+                        config: BaseAnimationConfig(
+                          delay: 1000.ms,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _buildExperienceCard("3+", "Years Experience"),
+                              SizedBox(width: 24),
+                              _buildExperienceCard("15+", "Projects"),
+                              SizedBox(width: 24),
+                              _buildExperienceCard("120+", "GitHub Stars"),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               )
