@@ -3,7 +3,8 @@ import 'package:flutter_animate_on_scroll/flutter_animate_on_scroll.dart';
 import 'package:portfolio_website/utils/colors.dart';
 
 class WorkExperienceSection extends StatelessWidget {
-  const WorkExperienceSection({super.key, required this.height, required this.width});
+  const WorkExperienceSection(
+      {super.key, required this.height, required this.width});
 
   final double height;
   final double width;
@@ -16,15 +17,23 @@ class WorkExperienceSection extends StatelessWidget {
   }) {
     final animations = [
       // Index 0: FadeInUp
-      FadeInUp(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      FadeInUp(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
       // Index 1: SlideInLeft
-      SlideInLeft(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      SlideInLeft(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
       // Index 2: SlideInRight
-      SlideInRight(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      SlideInRight(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
       // Index 3: FadeIn
-      FadeIn(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      FadeIn(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
     ];
-    
+
     return animations[index % animations.length];
   }
 
@@ -46,212 +55,240 @@ class WorkExperienceSection extends StatelessWidget {
       index: index,
       delay: delay,
       child: Container(
-          margin: EdgeInsets.only(bottom: 24),
-          padding: EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            gradient: isLatest 
-                ? LinearGradient(
-                    colors: [
-                      context.customColors.gunMetal,
-                      context.customColors.gunMetal.withOpacity(0.9),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  )
-                : null,
-            color: isLatest ? null : Colors.white,
-            borderRadius: BorderRadius.circular(18),
-            border: isLatest ? null : Border.all(
-              color: context.customColors.gunMetal.withOpacity(0.15),
-              width: 1.5,
+        margin: EdgeInsets.only(bottom: 24),
+        padding: EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          gradient: isLatest
+              ? LinearGradient(
+                  colors: [
+                    context.customColors.gunMetal,
+                    context.customColors.gunMetal.withOpacity(0.9),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )
+              : null,
+          color: isLatest ? null : Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          border: isLatest
+              ? null
+              : Border.all(
+                  color: context.customColors.gunMetal.withOpacity(0.15),
+                  width: 1.5,
+                ),
+          boxShadow: [
+            BoxShadow(
+              color: isLatest
+                  ? context.customColors.gunMetal.withOpacity(0.25)
+                  : Colors.black.withOpacity(0.08),
+              blurRadius: isLatest ? 20 : 12,
+              offset: Offset(0, isLatest ? 8 : 4),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: isLatest 
-                    ? context.customColors.gunMetal.withOpacity(0.25)
-                    : Colors.black.withOpacity(0.08),
-                blurRadius: isLatest ? 20 : 12,
-                offset: Offset(0, isLatest ? 8 : 4),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: isLatest 
-                          ? context.customColors.dutchWhite.withOpacity(0.2) 
-                          : context.customColors.gunMetal.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.work,
-                      color: isLatest ? context.customColors.dutchWhite : context.customColors.gunMetal,
-                      size: 20,
-                    ),
-                  ),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            color: isLatest ? context.customColors.dutchWhite : context.customColors.gunMetal,
-                            letterSpacing: -0.3,
-                          ),
-                        ),
-                        SizedBox(height: 6),
-                        Text(
-                          company,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: isLatest ? context.customColors.dutchWhite.withOpacity(0.9) : context.customColors.cadetGrey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  if (isLatest)
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: context.customColors.dutchWhite,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        'Current',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: context.customColors.gunMetal,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-              SizedBox(height: 12),
-              Row(
-                children: [
-                  Icon(
-                    Icons.calendar_today,
-                    size: 16,
-                    color: isLatest ? context.customColors.dutchWhite.withOpacity(0.8) : context.customColors.cadetGrey,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    "$period • $duration",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: isLatest ? context.customColors.dutchWhite.withOpacity(0.8) : context.customColors.cadetGrey,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 8),
-              Row(
-                children: [
-                  Icon(
-                    Icons.location_on,
-                    size: 16,
-                    color: isLatest ? context.customColors.dutchWhite.withOpacity(0.8) : context.customColors.cadetGrey,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    "$location • $type",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: isLatest ? context.customColors.dutchWhite.withOpacity(0.8) : context.customColors.cadetGrey,
-                    ),
-                  ),
-                ],
-              ),
-              if (note != null) ...[
-                SizedBox(height: 12),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
                 Container(
-                  padding: EdgeInsets.all(12),
+                  padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: isLatest 
-                        ? context.customColors.dutchWhite.withOpacity(0.1) 
-                        : context.customColors.cadetGrey.withOpacity(0.1),
+                    color: isLatest
+                        ? context.customColors.dutchWhite.withOpacity(0.2)
+                        : context.customColors.gunMetal.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
+                  child: Icon(
+                    Icons.work,
+                    color: isLatest
+                        ? context.customColors.dutchWhite
+                        : context.customColors.gunMetal,
+                    size: 20,
+                  ),
+                ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.info_outline,
-                        size: 16,
-                        color: isLatest ? context.customColors.dutchWhite : context.customColors.cadetGrey,
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: isLatest
+                              ? context.customColors.dutchWhite
+                              : context.customColors.gunMetal,
+                          letterSpacing: -0.3,
+                        ),
                       ),
-                      SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          note,
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: isLatest ? context.customColors.dutchWhite : context.customColors.cadetGrey,
-                            fontStyle: FontStyle.italic,
-                          ),
+                      SizedBox(height: 6),
+                      Text(
+                        company,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: isLatest
+                              ? context.customColors.dutchWhite.withOpacity(0.9)
+                              : context.customColors.cadetGrey,
                         ),
                       ),
                     ],
                   ),
                 ),
+                if (isLatest)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: context.customColors.dutchWhite,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      'Current',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: context.customColors.gunMetal,
+                      ),
+                    ),
+                  ),
               ],
-              if (skills.isNotEmpty) ...[
-                SizedBox(height: 16),
+            ),
+            SizedBox(height: 12),
+            Row(
+              children: [
+                Icon(
+                  Icons.calendar_today,
+                  size: 16,
+                  color: isLatest
+                      ? context.customColors.dutchWhite.withOpacity(0.8)
+                      : context.customColors.cadetGrey,
+                ),
+                SizedBox(width: 8),
                 Text(
-                  "Key Skills:",
+                  "$period • $duration",
                   style: TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: isLatest ? context.customColors.dutchWhite : context.customColors.gunMetal,
+                    color: isLatest
+                        ? context.customColors.dutchWhite.withOpacity(0.8)
+                        : context.customColors.cadetGrey,
                   ),
                 ),
-                SizedBox(height: 8),
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 8,
-                  children: skills
-                      .map((skill) => Container(
-                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: isLatest 
-                                  ? context.customColors.dutchWhite.withOpacity(0.2) 
-                                  : context.customColors.gunMetal.withOpacity(0.08),
-                              borderRadius: BorderRadius.circular(12),
-                              border: isLatest 
-                                  ? Border.all(
-                                      color: context.customColors.dutchWhite.withOpacity(0.3),
-                                      width: 0.5,
-                                    )
-                                  : Border.all(
-                                      color: context.customColors.gunMetal.withOpacity(0.2),
-                                      width: 0.5,
-                                    ),
-                            ),
-                            child: Text(
-                              skill,
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: isLatest ? context.customColors.dutchWhite : context.customColors.gunMetal,
-                              ),
-                            ),
-                          ))
-                      .toList(),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(
+                  Icons.location_on,
+                  size: 16,
+                  color: isLatest
+                      ? context.customColors.dutchWhite.withOpacity(0.8)
+                      : context.customColors.cadetGrey,
+                ),
+                SizedBox(width: 8),
+                Text(
+                  "$location • $type",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: isLatest
+                        ? context.customColors.dutchWhite.withOpacity(0.8)
+                        : context.customColors.cadetGrey,
+                  ),
                 ),
               ],
+            ),
+            if (note != null) ...[
+              SizedBox(height: 12),
+              Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: isLatest
+                      ? context.customColors.dutchWhite.withOpacity(0.1)
+                      : context.customColors.cadetGrey.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      size: 16,
+                      color: isLatest
+                          ? context.customColors.dutchWhite
+                          : context.customColors.cadetGrey,
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        note,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: isLatest
+                              ? context.customColors.dutchWhite
+                              : context.customColors.cadetGrey,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
-          ),
+            if (skills.isNotEmpty) ...[
+              SizedBox(height: 16),
+              Text(
+                "Key Skills:",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: isLatest
+                      ? context.customColors.dutchWhite
+                      : context.customColors.gunMetal,
+                ),
+              ),
+              SizedBox(height: 8),
+              Wrap(
+                spacing: 10,
+                runSpacing: 8,
+                children: skills
+                    .map((skill) => Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: isLatest
+                                ? context.customColors.dutchWhite
+                                    .withOpacity(0.2)
+                                : context.customColors.gunMetal
+                                    .withOpacity(0.08),
+                            borderRadius: BorderRadius.circular(12),
+                            border: isLatest
+                                ? Border.all(
+                                    color: context.customColors.dutchWhite
+                                        .withOpacity(0.3),
+                                    width: 0.5,
+                                  )
+                                : Border.all(
+                                    color: context.customColors.gunMetal
+                                        .withOpacity(0.2),
+                                    width: 0.5,
+                                  ),
+                          ),
+                          child: Text(
+                            skill,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: isLatest
+                                  ? context.customColors.dutchWhite
+                                  : context.customColors.gunMetal,
+                            ),
+                          ),
+                        ))
+                    .toList(),
+              ),
+            ],
+          ],
         ),
       ),
     );
@@ -269,78 +306,77 @@ class WorkExperienceSection extends StatelessWidget {
       index: index,
       delay: delay,
       child: Container(
-          margin: EdgeInsets.only(bottom: 16),
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                context.customColors.cadetGrey.withOpacity(0.08),
-                context.customColors.cadetGrey.withOpacity(0.15),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: context.customColors.cadetGrey.withOpacity(0.2),
-              width: 1,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 8,
-                offset: Offset(0, 3),
-              ),
+        margin: EdgeInsets.only(bottom: 16),
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              context.customColors.cadetGrey.withOpacity(0.08),
+              context.customColors.cadetGrey.withOpacity(0.15),
             ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: context.customColors.gunMetal.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(
-                  Icons.school,
-                  color: context.customColors.gunMetal,
-                  size: 20,
-                ),
-              ),
-              SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      degree,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: context.customColors.gunMetal,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      institution,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: context.customColors.cadetGrey,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      period,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: context.customColors.cadetGrey,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: context.customColors.cadetGrey.withOpacity(0.2),
+            width: 1,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 8,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: context.customColors.gunMetal.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.school,
+                color: context.customColors.gunMetal,
+                size: 20,
+              ),
+            ),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    degree,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: context.customColors.gunMetal,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    institution,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: context.customColors.cadetGrey,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    period,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: context.customColors.cadetGrey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -424,7 +460,8 @@ class WorkExperienceSection extends StatelessWidget {
                     location: "Mumbai, Maharashtra, India",
                     type: "Full-time • On-site",
                     skills: ["Software Development", "Team Leadership"],
-                    note: "Working at Snapwork Technologies as a deputed developer on behalf of Puretech.",
+                    note:
+                        "Working at Snapwork Technologies as a deputed developer on behalf of Puretech.",
                     delay: 700,
                     isLatest: false,
                     index: 1,
@@ -437,7 +474,10 @@ class WorkExperienceSection extends StatelessWidget {
                     period: "Jun 2023 - Mar 2024",
                     location: "Borivali, Maharashtra, India",
                     type: "Full-time • On-site",
-                    skills: ["Red Hat Enterprise Linux (RHEL)", "Linux System Administration"],
+                    skills: [
+                      "Red Hat Enterprise Linux (RHEL)",
+                      "Linux System Administration"
+                    ],
                     delay: 800,
                     isLatest: false,
                     index: 2,
@@ -445,19 +485,23 @@ class WorkExperienceSection extends StatelessWidget {
                   _buildExperienceCard(
                     context: context,
                     title: "Intern",
-                    company: "ICMR - National Institute for Research in Reproductive and Child Health (NIRRCH)",
+                    company:
+                        "ICMR - National Institute for Research in Reproductive and Child Health (NIRRCH)",
                     duration: "9 months",
                     period: "Sep 2022 - May 2023",
                     location: "Mumbai, Maharashtra, India",
                     type: "Internship",
-                    skills: ["Python (Programming Language)", "Logical Volume Manager (LVM)"],
+                    skills: [
+                      "Python (Programming Language)",
+                      "Logical Volume Manager (LVM)"
+                    ],
                     delay: 900,
                     isLatest: false,
                     index: 3,
                   ),
-                  
+
                   SizedBox(height: 48),
-                  
+
                   // Education Section
                   Text(
                     "Education",
