@@ -17,19 +17,31 @@ class ProjectsSection extends StatelessWidget {
   }) {
     final animations = [
       // Index 0: FadeIn
-      FadeIn(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      FadeIn(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
       // Index 1: SlideInRight
-      SlideInRight(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      SlideInRight(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
       // Index 2: SlideInLeft
-      SlideInLeft(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      SlideInLeft(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
       // Index 3: FadeInUp
-      FadeInUp(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      FadeInUp(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
       // Index 4: SlideInUp
-      SlideInUp(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      SlideInUp(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
       // Index 5: FadeInDown
-      FadeInDown(config: BaseAnimationConfig(delay: Duration(milliseconds: delay), child: child)),
+      FadeInDown(
+          config: BaseAnimationConfig(
+              delay: Duration(milliseconds: delay), child: child)),
     ];
-    
+
     return animations[index % animations.length];
   }
 
@@ -63,129 +75,169 @@ class ProjectsSection extends StatelessWidget {
             ),
           ],
         ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: iconColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Icon(
-                      icon,
-                      color: iconColor,
-                      size: 24,
-                    ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: iconColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  SizedBox(width: 16),
-                  Expanded(
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        color: context.customColors.gunMetal,
-                        letterSpacing: -0.3,
-                      ),
-                    ),
+                  child: Icon(
+                    icon,
+                    color: iconColor,
+                    size: 24,
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.amber, size: 16),
-                      SizedBox(width: 4),
-                      Text(
-                        stars.toString(),
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: context.customColors.cadetGrey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
-              Text(
-                description,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black87,
-                  height: 1.6,
-                  fontWeight: FontWeight.w400,
                 ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      color: context.customColors.gunMetal,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.star, color: Colors.amber, size: 16),
+                    SizedBox(width: 4),
+                    Text(
+                      stars.toString(),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: context.customColors.cadetGrey,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            Text(
+              description,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black87,
+                height: 1.6,
+                fontWeight: FontWeight.w400,
               ),
-              SizedBox(height: 16),
-              Wrap(
-                spacing: 10,
-                runSpacing: 8,
-                children: technologies
-                    .map((tech) => Container(
-                          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                context.customColors.cadetGrey.withOpacity(0.15),
-                                context.customColors.cadetGrey.withOpacity(0.25),
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: context.customColors.cadetGrey.withOpacity(0.3),
-                              width: 0.5,
-                            ),
-                          ),
-                          child: Text(
-                            tech,
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                              color: context.customColors.gunMetal,
-                            ),
-                          ),
-                        ))
-                    .toList(),
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => _launchUrl(githubUrl),
-                    child: MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            ),
+            SizedBox(height: 16),
+            Wrap(
+              spacing: 10,
+              runSpacing: 8,
+              children: technologies
+                  .map((tech) => Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              context.customColors.gunMetal,
-                              context.customColors.gunMetal.withOpacity(0.8),
+                              context.customColors.cadetGrey.withOpacity(0.15),
+                              context.customColors.cadetGrey.withOpacity(0.25),
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: context.customColors.gunMetal.withOpacity(0.3),
-                              blurRadius: 8,
-                              offset: Offset(0, 3),
-                            ),
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            color:
+                                context.customColors.cadetGrey.withOpacity(0.3),
+                            width: 0.5,
+                          ),
+                        ),
+                        child: Text(
+                          tech,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: context.customColors.gunMetal,
+                          ),
+                        ),
+                      ))
+                  .toList(),
+            ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () => _launchUrl(githubUrl),
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            context.customColors.gunMetal,
+                            context.customColors.gunMetal.withOpacity(0.8),
                           ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                context.customColors.gunMetal.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.code, color: Colors.white, size: 16),
+                          SizedBox(width: 8),
+                          Text(
+                            'GitHub',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                if (liveUrl != null) ...[
+                  SizedBox(width: 12),
+                  GestureDetector(
+                    onTap: () => _launchUrl(liveUrl),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: context.customColors.gunMetal,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.transparent,
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.code, color: Colors.white, size: 16),
+                            Icon(Icons.launch,
+                                color: context.customColors.gunMetal, size: 16),
                             SizedBox(width: 8),
                             Text(
-                              'GitHub',
+                              'Live Demo',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: context.customColors.gunMetal,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 14,
                               ),
@@ -195,45 +247,10 @@ class ProjectsSection extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (liveUrl != null) ...[
-                    SizedBox(width: 12),
-                    GestureDetector(
-                      onTap: () => _launchUrl(liveUrl),
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: context.customColors.gunMetal,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.transparent,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.launch, color: context.customColors.gunMetal, size: 16),
-                              SizedBox(width: 8),
-                              Text(
-                                'Live Demo',
-                                style: TextStyle(
-                                  color: context.customColors.gunMetal,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ],
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -297,9 +314,11 @@ class ProjectsSection extends StatelessWidget {
                   _buildProjectCard(
                     context: context,
                     title: "GUI YouTube Downloader",
-                    description: "A cross-platform Python application with a modern GUI for downloading YouTube videos. Features include multiple format options, playlist support, and progress tracking.",
+                    description:
+                        "A cross-platform Python application with a modern GUI for downloading YouTube videos. Features include multiple format options, playlist support, and progress tracking.",
                     technologies: ["Python", "tkinter", "yt-dlp", "GUI"],
-                    githubUrl: "https://github.com/ShalmonAnandas/GUI-YouTube-Downloader",
+                    githubUrl:
+                        "https://github.com/ShalmonAnandas/GUI-YouTube-Downloader",
                     stars: 120,
                     delay: 600,
                     icon: Icons.download,
@@ -309,8 +328,14 @@ class ProjectsSection extends StatelessWidget {
                   _buildProjectCard(
                     context: context,
                     title: "Books API",
-                    description: "A FastAPI-based RESTful service for library management. Features include book search, user authentication, borrowing system, and comprehensive documentation.",
-                    technologies: ["Python", "FastAPI", "SQLAlchemy", "PostgreSQL"],
+                    description:
+                        "A FastAPI-based RESTful service for library management. Features include book search, user authentication, borrowing system, and comprehensive documentation.",
+                    technologies: [
+                      "Python",
+                      "FastAPI",
+                      "SQLAlchemy",
+                      "PostgreSQL"
+                    ],
                     githubUrl: "https://github.com/ShalmonAnandas/books-api",
                     stars: 15,
                     delay: 700,
@@ -321,7 +346,8 @@ class ProjectsSection extends StatelessWidget {
                   _buildProjectCard(
                     context: context,
                     title: "0.1 + 0.2 != 0.3",
-                    description: "Multi-language demonstration of floating point arithmetic quirks. Educational project showing IEEE 754 precision issues across Python, JavaScript, and C++.",
+                    description:
+                        "Multi-language demonstration of floating point arithmetic quirks. Educational project showing IEEE 754 precision issues across Python, JavaScript, and C++.",
                     technologies: ["Python", "JavaScript", "C++", "Education"],
                     githubUrl: "https://github.com/ShalmonAnandas/0.1-0.2-0.3",
                     liveUrl: "https://floating-point-demo.vercel.app",
@@ -334,7 +360,8 @@ class ProjectsSection extends StatelessWidget {
                   _buildProjectCard(
                     context: context,
                     title: "Movie App",
-                    description: "A Flutter mobile application for browsing movies and TV shows. Features include search functionality, detailed movie information, and personalized recommendations.",
+                    description:
+                        "A Flutter mobile application for browsing movies and TV shows. Features include search functionality, detailed movie information, and personalized recommendations.",
                     technologies: ["Flutter", "Dart", "REST API", "Mobile"],
                     githubUrl: "https://github.com/ShalmonAnandas/movie-app",
                     stars: 25,
@@ -346,9 +373,11 @@ class ProjectsSection extends StatelessWidget {
                   _buildProjectCard(
                     context: context,
                     title: "Interactive Games Collection",
-                    description: "A collection of web-based interactive games including puzzle games, arcade-style games, and brain teasers built with modern web technologies.",
+                    description:
+                        "A collection of web-based interactive games including puzzle games, arcade-style games, and brain teasers built with modern web technologies.",
                     technologies: ["JavaScript", "HTML5", "CSS3", "Canvas"],
-                    githubUrl: "https://github.com/ShalmonAnandas/interactive-games",
+                    githubUrl:
+                        "https://github.com/ShalmonAnandas/interactive-games",
                     liveUrl: "https://shalmon-games.vercel.app",
                     stars: 12,
                     delay: 1000,
@@ -359,9 +388,11 @@ class ProjectsSection extends StatelessWidget {
                   _buildProjectCard(
                     context: context,
                     title: "Emotions & TechTips",
-                    description: "Personal blog website focusing on technology insights and emotional intelligence in the tech industry. Built with modern web frameworks and responsive design.",
+                    description:
+                        "Personal blog website focusing on technology insights and emotional intelligence in the tech industry. Built with modern web frameworks and responsive design.",
                     technologies: ["Next.js", "React", "TypeScript", "Vercel"],
-                    githubUrl: "https://github.com/ShalmonAnandas/emotions-and-tech-tips",
+                    githubUrl:
+                        "https://github.com/ShalmonAnandas/emotions-and-tech-tips",
                     liveUrl: "https://emotions-and-tech-tips.vercel.app",
                     stars: 5,
                     delay: 1100,
