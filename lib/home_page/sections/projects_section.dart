@@ -241,8 +241,12 @@ class ProjectsSection extends StatelessWidget {
 
   Future<void> _launchUrl(String url) async {
     final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      print('Could not launch URL: $e');
     }
   }
 

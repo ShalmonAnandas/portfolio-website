@@ -138,15 +138,23 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _launchExternalBlog() async {
     final Uri url = Uri.parse('https://www.shalmon.blog/');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      print('Could not launch blog URL: $e');
     }
   }
 
   Future<void> _launchExternalContact() async {
     final Uri url = Uri.parse('mailto:shalmon@example.com');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      print('Could not launch contact URL: $e');
     }
   }
 
