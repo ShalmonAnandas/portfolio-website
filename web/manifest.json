@@ -1,11 +1,11 @@
 {
-    "name": "portfolio_website",
-    "short_name": "portfolio_website",
+    "name": "Shalmon Anandas - Portfolio",
+    "short_name": "Shalmon Portfolio",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#2b3537",
+    "theme_color": "#2b3537",
+    "description": "Shalmon Anandas - Software Developer & Computer Science Graduate Portfolio",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

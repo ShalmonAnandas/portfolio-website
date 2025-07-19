@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lottie/lottie.dart';
-import 'package:portfolio_website/about_me_page/about_me_page.dart';
 import 'package:portfolio_website/home_page/home_page_content.dart';
+import 'package:portfolio_website/home_page/sections/about_section.dart';
+import 'package:portfolio_website/home_page/sections/projects_section.dart';
+import 'package:portfolio_website/home_page/sections/work_experience_section.dart';
 import 'package:portfolio_website/utils/assets.dart';
 import 'package:portfolio_website/utils/static_text.dart';
 import 'package:portfolio_website/widgets/landscape_header.dart';
 import 'package:portfolio_website/widgets/portrait_header.dart';
 import 'package:qlevar_router/qlevar_router.dart';
-import 'package:scroll_animator/scroll_animator.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../utils/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,11 +24,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final ScrollController _scrollController;
+  final GlobalKey _aboutKey = GlobalKey();
+  final GlobalKey _projectsKey = GlobalKey();
+  final GlobalKey _resumeKey = GlobalKey();
+  
   late List<Widget> ctaList = [
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       child: InkWell(
-        onTap: () => QR.popUntilOrPush(AboutMePage.routeName),
+        onTap: () => _scrollToSection(_aboutKey),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Text(
@@ -41,39 +47,48 @@ class _HomePageState extends State<HomePage> {
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.resume,
-          style: TextStyle(
-            color: context.customColors.dutchWhite,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => _scrollToSection(_projectsKey),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.myProjects,
+            style: TextStyle(
+              color: context.customColors.dutchWhite,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.myProjects,
-          style: TextStyle(
-            color: context.customColors.dutchWhite,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => _scrollToSection(_resumeKey),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.resume,
+            style: TextStyle(
+              color: context.customColors.dutchWhite,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
     ),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          StaticText.blog,
-          style: TextStyle(
-            color: context.customColors.dutchWhite,
-            fontSize: 16,
+      child: InkWell(
+        onTap: () => _launchExternalBlog(),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            StaticText.blog,
+            style: TextStyle(
+              color: context.customColors.dutchWhite,
+              fontSize: 16,
+            ),
           ),
         ),
       ),
@@ -81,7 +96,7 @@ class _HomePageState extends State<HomePage> {
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       child: GestureDetector(
-        onTap: () => print("Shalmon"),
+        onTap: () => _launchExternalContact(),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Container(
@@ -107,19 +122,40 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _scrollController = AnimatedScrollController(
-      animationFactory: const ChromiumImpulse(),
-    );
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        QR.to('/aboutme').then((_) {
-          _scrollController.animateTo(0,
-              duration: Duration(milliseconds: 200), curve: Curves.easeIn);
-        });
-      } else if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.forward) {}
-    });
+    _scrollController = ScrollController();
+  }
+
+  void _scrollToSection(GlobalKey key) {
+    final context = key.currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: Duration(milliseconds: 800),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  Future<void> _launchExternalBlog() async {
+    final Uri url = Uri.parse('https://www.shalmon.blog/');
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      print('Could not launch blog URL: $e');
+    }
+  }
+
+  Future<void> _launchExternalContact() async {
+    final Uri url = Uri.parse('mailto:shalmon@example.com');
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      print('Could not launch contact URL: $e');
+    }
   }
 
   @override
@@ -147,22 +183,42 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
-        child: Stack(
+        child: Column(
           children: [
-            HomePageBackground(height: height, width: width),
-            (MediaQuery.of(context).size.aspectRatio > 0.8)
-                ? LandscapeHeader(
-                    height: height,
-                    width: width,
-                    ctaList: ctaList,
-                    headerColor: context.customColors.dutchWhite,
-                  )
-                : PortraitHeader(
-                    height: height,
-                    width: width,
-                    headerColor: context.customColors.dutchWhite,
-                  ),
-            HomePageContent(height: height, width: width)
+            // Home Section
+            Stack(
+              children: [
+                HomePageBackground(height: height, width: width),
+                (MediaQuery.of(context).size.aspectRatio > 0.8)
+                    ? LandscapeHeader(
+                        height: height,
+                        width: width,
+                        ctaList: ctaList,
+                        headerColor: context.customColors.dutchWhite,
+                      )
+                    : PortraitHeader(
+                        height: height,
+                        width: width,
+                        headerColor: context.customColors.dutchWhite,
+                      ),
+                HomePageContent(height: height, width: width)
+              ],
+            ),
+            // About Section
+            Container(
+              key: _aboutKey,
+              child: AboutSection(height: height, width: width),
+            ),
+            // Projects Section
+            Container(
+              key: _projectsKey,
+              child: ProjectsSection(height: height, width: width),
+            ),
+            // Work Experience Section
+            Container(
+              key: _resumeKey,
+              child: WorkExperienceSection(height: height, width: width),
+            ),
           ],
         ),
       ),
@@ -198,12 +254,18 @@ class HomePageBackground extends StatelessWidget {
             color: Colors.black,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 StaticText.scrollDown,
                 style: TextStyle(
                     color: context.customColors.dutchWhite, fontSize: 16),
+              ),
+              SizedBox(height: 8),
+              Text(
+                "Discover more about me",
+                style: TextStyle(
+                    color: context.customColors.dutchWhite.withOpacity(0.7), fontSize: 14),
               ),
               Lottie.asset(
                 Assets.scrollDownAnim,
