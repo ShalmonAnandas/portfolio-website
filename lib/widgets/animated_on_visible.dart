@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 /// A widget that animates its child only once when it becomes visible
 class AnimatedOnVisible extends StatefulWidget {
@@ -25,15 +25,12 @@ class AnimatedOnVisible extends StatefulWidget {
 class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
     with SingleTickerProviderStateMixin {
   // Constants for visibility detection
-  static const double _visibilityThresholdTop = 0.9;
-  static const double _visibilityThresholdBottom = 0.1;
   static const double _animationOffset = 30.0;
   static const double _scaleStart = 0.8;
-  
+
   late AnimationController _controller;
   late Animation<double> _animation;
   bool _hasAnimated = false;
-  bool _isVisible = false;
 
   @override
   void initState() {
@@ -46,9 +43,9 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
       parent: _controller,
       curve: widget.curve,
     );
-    
-    // Check visibility once after first frame
-    WidgetsBinding.instance.addPostFrameCallback((_) => _checkVisibility());
+
+    // Start hidden
+    _controller.value = 0.0;
   }
 
   @override
@@ -57,39 +54,28 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
     super.dispose();
   }
 
-  void _checkVisibility() {
+  void _triggerOnce() {
     if (_hasAnimated || !mounted) return;
-
-    final RenderBox? renderBox = context.findRenderObject() as RenderBox?;
-    if (renderBox == null || !renderBox.attached) return;
-
-    final position = renderBox.localToGlobal(Offset.zero);
-    final size = renderBox.size;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    // Check if at least 20% of the widget is visible
-    final isVisible = position.dy < screenHeight * _visibilityThresholdTop &&
-        position.dy + size.height > screenHeight * _visibilityThresholdBottom;
-
-    if (isVisible && !_isVisible) {
-      setState(() {
-        _isVisible = true;
-        _hasAnimated = true;
-      });
-      Future.delayed(widget.delay, () {
-        if (mounted) {
-          _controller.forward();
-        }
-      });
-    }
+    _hasAnimated = true;
+    Future.delayed(widget.delay, () {
+      if (mounted) {
+        _controller.forward();
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return NotificationListener<ScrollNotification>(
-      onNotification: (notification) {
-        _checkVisibility();
-        return false;
+    return VisibilityDetector(
+      key: widget.key is Key ? widget.key as Key : UniqueKey(),
+      onVisibilityChanged: (info) {
+        if (_hasAnimated) return;
+        final visible = info.visibleFraction > 0.2 &&
+            info.visibleBounds.height > 0 &&
+            info.visibleBounds.width > 0;
+        if (visible) {
+          _triggerOnce();
+        }
       },
       child: AnimatedBuilder(
         animation: _animation,

@@ -12,11 +12,18 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-  ThemeData _buildTextTheme(brightness) {
-    var baseTheme = ThemeData(brightness: brightness);
+  ThemeData _buildTheme() {
+    final base = ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFF6366F1),
+        brightness: Brightness.light,
+      ),
+      scaffoldBackgroundColor: const Color(0xFFF5F7FA),
+      useMaterial3: true,
+    );
 
-    return baseTheme.copyWith(
-      textTheme: GoogleFonts.quicksandTextTheme(baseTheme.textTheme).copyWith(
+    return base.copyWith(
+      textTheme: GoogleFonts.quicksandTextTheme(base.textTheme).copyWith(
         // Use Poppins for headings
         headlineLarge: GoogleFonts.poppins(
           fontSize: 42,
@@ -54,7 +61,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: _buildTextTheme(Brightness.dark),
+      theme: _buildTheme(),
       routeInformationParser: QRouteInformationParser(),
       routerDelegate: QRouterDelegate(AppRoutes().routes),
     );

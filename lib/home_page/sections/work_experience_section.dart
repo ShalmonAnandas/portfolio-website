@@ -40,7 +40,7 @@ class WorkExperienceSection extends StatelessWidget {
                 )
               : null,
           color: isLatest ? null : Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(14),
           border: isLatest
               ? null
               : Border.all(
@@ -50,10 +50,10 @@ class WorkExperienceSection extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: isLatest
-                  ? context.customColors.primaryAccent.withOpacity(0.3)
+                  ? context.customColors.primaryAccent.withOpacity(0.25)
                   : Colors.black.withOpacity(0.08),
-              blurRadius: isLatest ? 25 : 15,
-              offset: Offset(0, isLatest ? 10 : 5),
+              blurRadius: isLatest ? 16 : 10,
+              offset: Offset(0, isLatest ? 6 : 4),
             ),
           ],
         ),
@@ -224,9 +224,8 @@ class WorkExperienceSection extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
-                  color: isLatest
-                      ? Colors.white
-                      : context.customColors.gunMetal,
+                  color:
+                      isLatest ? Colors.white : context.customColors.gunMetal,
                 ),
               ),
               SizedBox(height: 12),
@@ -240,12 +239,14 @@ class WorkExperienceSection extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: isLatest
                                 ? Colors.white.withOpacity(0.2)
-                                : context.customColors.primaryAccent.withOpacity(0.1),
+                                : context.customColors.primaryAccent
+                                    .withOpacity(0.1),
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
                               color: isLatest
                                   ? Colors.white.withOpacity(0.3)
-                                  : context.customColors.primaryAccent.withOpacity(0.3),
+                                  : context.customColors.primaryAccent
+                                      .withOpacity(0.3),
                               width: 1,
                             ),
                           ),
@@ -292,8 +293,8 @@ class WorkExperienceSection extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.06),
-              blurRadius: 12,
-              offset: Offset(0, 4),
+              blurRadius: 8,
+              offset: Offset(0, 3),
             ),
           ],
         ),
@@ -370,17 +371,10 @@ class WorkExperienceSection extends StatelessWidget {
     return Container(
       width: width,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.white,
-            context.customColors.dutchWhite,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
+        color: context.customColors.dutchWhite,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 60.0),
         child: Column(
           children: [
             AnimatedOnVisible(
@@ -429,79 +423,74 @@ class WorkExperienceSection extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 60),
+            SizedBox(height: 40),
             Container(
               constraints: BoxConstraints(maxWidth: 900),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Experience Section
-                  Text(
-                    "Professional Experience",
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: context.customColors.gunMetal,
-                      letterSpacing: -0.5,
-                    ),
-                  ),
-                  SizedBox(height: 32),
-                  _buildExperienceCard(
-                    context: context,
-                    title: "Flutter Developer",
-                    company: "SnapWork Technologies",
-                    duration: "8 months",
-                    period: "Dec 2024 - Present",
-                    location: "On-site",
-                    type: "Full-time",
-                    skills: ["Flutter", "Dart", "Mobile Development"],
-                    delay: 400,
-                    isLatest: true,
-                  ),
-                  _buildExperienceCard(
-                    context: context,
-                    title: "Senior Software Developer",
-                    company: "Pure Technology",
-                    duration: "10 months",
-                    period: "Mar 2024 - Dec 2024",
-                    location: "Mumbai, Maharashtra, India",
-                    type: "Full-time • On-site",
-                    skills: ["Software Development", "Team Leadership"],
-                    note:
-                        "Working at Snapwork Technologies as a deputed developer on behalf of Puretech.",
-                    delay: 450,
-                    isLatest: false,
-                  ),
-                  _buildExperienceCard(
-                    context: context,
-                    title: "Junior Software Developer",
-                    company: "Intellect Software Solutions Pvt. Ltd.",
-                    duration: "10 months",
-                    period: "Jun 2023 - Mar 2024",
-                    location: "Borivali, Maharashtra, India",
-                    type: "Full-time • On-site",
-                    skills: [
-                      "Red Hat Enterprise Linux (RHEL)",
-                      "Linux System Administration"
+                  Column(
+                    children: [
+                      _buildExperienceCard(
+                        context: context,
+                        title: "Flutter Developer",
+                        company: "SnapWork Technologies",
+                        duration: "8 months",
+                        period: "Dec 2024 - Present",
+                        location: "On-site",
+                        type: "Full-time",
+                        skills: ["Flutter", "Dart", "Mobile Development"],
+                        delay: 400,
+                        isLatest: true,
+                      ),
+                      _buildExperienceCard(
+                        context: context,
+                        title: "Senior Software Developer",
+                        company: "Pure Technology",
+                        duration: "10 months",
+                        period: "Mar 2024 - Dec 2024",
+                        location: "Mumbai, Maharashtra, India",
+                        type: "Full-time • On-site",
+                        skills: ["Software Development", "Team Leadership"],
+                        note:
+                            "Working at Snapwork Technologies as a deputed developer on behalf of Puretech.",
+                        delay: 450,
+                        isLatest: false,
+                      ),
+                      _buildExperienceCard(
+                        context: context,
+                        title: "Junior Software Developer",
+                        company: "Intellect Software Solutions Pvt. Ltd.",
+                        duration: "10 months",
+                        period: "Jun 2023 - Mar 2024",
+                        location: "Borivali, Maharashtra, India",
+                        type: "Full-time • On-site",
+                        skills: [
+                          "Red Hat Enterprise Linux (RHEL)",
+                          "Flutter",
+                          "Linux System Administration"
+                        ],
+                        delay: 500,
+                        isLatest: false,
+                      ),
+                      _buildExperienceCard(
+                        context: context,
+                        title: "Intern",
+                        company:
+                            "ICMR - National Institute for Research in Reproductive and Child Health (NIRRCH)",
+                        duration: "9 months",
+                        period: "Sep 2022 - May 2023",
+                        location: "Mumbai, Maharashtra, India",
+                        type: "Internship",
+                        skills: [
+                          "Python (Programming Language)",
+                          "PHP (Programming Language)",
+                          "Logical Volume Manager (LVM)"
+                        ],
+                        delay: 550,
+                        isLatest: false,
+                      ),
                     ],
-                    delay: 500,
-                    isLatest: false,
-                  ),
-                  _buildExperienceCard(
-                    context: context,
-                    title: "Intern",
-                    company:
-                        "ICMR - National Institute for Research in Reproductive and Child Health (NIRRCH)",
-                    duration: "9 months",
-                    period: "Sep 2022 - May 2023",
-                    location: "Mumbai, Maharashtra, India",
-                    type: "Internship",
-                    skills: [
-                      "Python (Programming Language)",
-                      "Logical Volume Manager (LVM)"
-                    ],
-                    delay: 550,
-                    isLatest: false,
                   ),
 
                   SizedBox(height: 60),
@@ -516,17 +505,17 @@ class WorkExperienceSection extends StatelessWidget {
                       letterSpacing: -0.5,
                     ),
                   ),
-                  SizedBox(height: 32),
+                  SizedBox(height: 24),
                   _buildEducationCard(
                     context: context,
-                    degree: "Master of Science in Computer Science",
+                    degree: "Master of Science in Bioinformatics",
                     institution: "University of Mumbai",
                     period: "2021 - 2023",
                     delay: 600,
                   ),
                   _buildEducationCard(
                     context: context,
-                    degree: "Bachelor of Science in Computer Science",
+                    degree: "Bachelor of Science in Zoology",
                     institution: "University of Mumbai",
                     period: "2018 - 2021",
                     delay: 650,

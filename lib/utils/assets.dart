@@ -8,4 +8,5 @@ class Assets {
 
   // Animations
   static String get scrollDownAnim => 'assets/animations/scroll_down_anim.json';
+  static String get bg => 'assets/images/bg.webp';
 }

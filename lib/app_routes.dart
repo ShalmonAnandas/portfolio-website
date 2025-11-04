@@ -45,7 +45,7 @@ class _BlogRedirectPageState extends State<BlogRedirectPage> {
     final Uri url = Uri.parse('https://www.shalmon.blog/');
     try {
       if (await canLaunchUrl(url)) {
-        await launchUrl(url, mode: LaunchMode.externalApplication);
+        await launchUrl(url, mode: LaunchMode.platformDefault);
       }
     } catch (e) {
       // If launch fails, just go back to home

@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:portfolio_website/utils/static_text.dart';
 
@@ -17,38 +18,35 @@ class LandscapeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height * 0.1,
-      width: width,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.black.withOpacity(0.1),
-            Colors.transparent,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 32),
-            child: Text(
-              StaticText.shalmonAnandas,
-              style: TextStyle(
-                color: headerColor,
-                fontWeight: FontWeight.w800,
-                fontSize: 34,
-                letterSpacing: -0.5,
+    return ClipRRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          height: height * 0.1,
+          width: width,
+          color: Colors.white.withOpacity(0.06),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 32),
+                child: Text(
+                  StaticText.shalmonAnandas,
+                  style: TextStyle(
+                    color: headerColor,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 34,
+                    letterSpacing: -0.5,
+                  ),
+                ),
               ),
-            ),
+              Spacer(),
+              ...ctaList
+            ],
           ),
-          Spacer(),
-          ...ctaList
-        ],
+        ),
       ),
     );
   }

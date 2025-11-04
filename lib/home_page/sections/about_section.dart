@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:portfolio_website/utils/colors.dart';
 import 'package:portfolio_website/widgets/animated_on_visible.dart';
@@ -20,12 +21,12 @@ class AboutSection extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: context.customColors.primaryAccent.withOpacity(0.3),
-            blurRadius: 12,
-            offset: Offset(0, 4),
+            color: context.customColors.primaryAccent.withOpacity(0.25),
+            blurRadius: 8,
+            offset: Offset(0, 3),
           ),
         ],
       ),
@@ -40,58 +41,59 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  Widget _buildExperienceCard(BuildContext context, String number, String label) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 20,
-            offset: Offset(0, 8),
+  Widget _buildExperienceCard(
+      BuildContext context, String number, String label) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: Colors.white.withOpacity(0.35)),
           ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Text(
-            number,
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.w900,
-              color: context.customColors.primaryAccent,
-              letterSpacing: -1.5,
-            ),
+          child: Column(
+            children: [
+              Text(
+                number,
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.w900,
+                  color: context.customColors.primaryAccent,
+                  letterSpacing: -1.5,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: context.customColors.gunMetal.withOpacity(0.8),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 8),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              color: context.customColors.cadetGrey,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final isWide = width >= 1000;
     return Container(
       width: width,
       decoration: BoxDecoration(
         color: context.customColors.dutchWhite,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 60.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Profile Image Placeholder
             AnimatedOnVisible(
               delay: Duration(milliseconds: 100),
               animationType: AnimationType.scaleIn,
@@ -110,7 +112,8 @@ class AboutSection extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: context.customColors.primaryAccent.withOpacity(0.3),
+                      color:
+                          context.customColors.primaryAccent.withOpacity(0.3),
                       blurRadius: 30,
                       offset: Offset(0, 15),
                     ),
@@ -155,21 +158,50 @@ class AboutSection extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 36),
             AnimatedOnVisible(
               delay: Duration(milliseconds: 400),
               animationType: AnimationType.fadeInUp,
               child: Container(
-                constraints: BoxConstraints(maxWidth: 900),
-                child: Text(
-                  "I'm a passionate software developer with a Master's degree in Computer Science, specializing in full-stack development, mobile applications, and API design. With expertise in Python, Dart/Flutter, JavaScript, and C++, I love creating innovative solutions that solve real-world problems.\n\nMy journey in technology spans across diverse projects from GUI applications and web development to bioinformatics tools and interactive games. I'm particularly interested in creating user-friendly applications that bridge the gap between complex technology and everyday users.",
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: context.customColors.cadetGrey,
-                      height: 1.8,
-                      fontWeight: FontWeight.w400),
-                  textAlign: TextAlign.center,
-                ),
+                constraints: BoxConstraints(maxWidth: 1100),
+                child: isWide
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "I'm a passionate software developer with a Master's degree in Computer Science, specializing in full-stack development, mobile applications, and API design. With expertise in Python, Dart/Flutter, Svelte, Go, and C++, I love creating innovative solutions that solve real-world problems.",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: context.customColors.cadetGrey,
+                                  height: 1.8,
+                                  fontWeight: FontWeight.w400),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          SizedBox(width: 32),
+                          Expanded(
+                            child: Text(
+                              "My journey in technology spans across diverse projects from GUI applications and web development to bioinformatics tools and interactive games. I'm particularly interested in creating user-friendly applications that bridge the gap between complex technology and everyday users.",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: context.customColors.cadetGrey,
+                                  height: 1.8,
+                                  fontWeight: FontWeight.w400),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Text(
+                        "I'm a passionate software developer with a Master's degree in Computer Science, specializing in full-stack development, mobile applications, and API design. With expertise in Python, Dart/Flutter, JavaScript, and C++, I love creating innovative solutions that solve real-world problems.\n\nMy journey in technology spans across diverse projects from GUI applications and web development to bioinformatics tools and interactive games. I'm particularly interested in creating user-friendly applications that bridge the gap between complex technology and everyday users.",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: context.customColors.cadetGrey,
+                            height: 1.8,
+                            fontWeight: FontWeight.w400),
+                        textAlign: TextAlign.center,
+                      ),
               ),
             ),
             SizedBox(height: 48),
@@ -196,7 +228,7 @@ class AboutSection extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 56),
+            SizedBox(height: 48),
             AnimatedOnVisible(
               delay: Duration(milliseconds: 600),
               animationType: AnimationType.fadeInUp,
@@ -206,8 +238,8 @@ class AboutSection extends StatelessWidget {
                 runSpacing: 24,
                 children: [
                   _buildExperienceCard(context, "3+", "Years Experience"),
-                  _buildExperienceCard(context, "15+", "Projects"),
-                  _buildExperienceCard(context, "120+", "GitHub Stars"),
+                  _buildExperienceCard(context, "20+", "Projects"),
+                  _buildExperienceCard(context, "700+", "GitHub Stars"),
                 ],
               ),
             ),
