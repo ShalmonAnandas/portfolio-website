@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   visibility_detector: ^0.4.0+2
   scroll_animator: ^0.3.0
-  google_fonts: ^6.2.1
+  google_fonts: ^6.3.2
   lottie: ^3.3.1
   flutter_native_splash: ^2.4.4
   auto_size_text: ^3.0.0
