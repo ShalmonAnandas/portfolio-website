@@ -24,6 +24,12 @@ class AnimatedOnVisible extends StatefulWidget {
 
 class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
     with SingleTickerProviderStateMixin {
+  // Constants for visibility detection
+  static const double _visibilityThresholdTop = 0.9;
+  static const double _visibilityThresholdBottom = 0.1;
+  static const double _animationOffset = 30.0;
+  static const double _scaleStart = 0.8;
+  
   late AnimationController _controller;
   late Animation<double> _animation;
   bool _hasAnimated = false;
@@ -40,6 +46,9 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
       parent: _controller,
       curve: widget.curve,
     );
+    
+    // Check visibility once after first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkVisibility());
   }
 
   @override
@@ -49,18 +58,18 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
   }
 
   void _checkVisibility() {
-    if (_hasAnimated) return;
+    if (_hasAnimated || !mounted) return;
 
     final RenderBox? renderBox = context.findRenderObject() as RenderBox?;
-    if (renderBox == null) return;
+    if (renderBox == null || !renderBox.attached) return;
 
     final position = renderBox.localToGlobal(Offset.zero);
     final size = renderBox.size;
     final screenHeight = MediaQuery.of(context).size.height;
 
     // Check if at least 20% of the widget is visible
-    final isVisible = position.dy < screenHeight * 0.9 &&
-        position.dy + size.height > screenHeight * 0.1;
+    final isVisible = position.dy < screenHeight * _visibilityThresholdTop &&
+        position.dy + size.height > screenHeight * _visibilityThresholdBottom;
 
     if (isVisible && !_isVisible) {
       setState(() {
@@ -77,8 +86,6 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => _checkVisibility());
-
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         _checkVisibility();
@@ -105,7 +112,7 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
         return Opacity(
           opacity: _animation.value,
           child: Transform.translate(
-            offset: Offset(0, 30 * (1 - _animation.value)),
+            offset: Offset(0, _animationOffset * (1 - _animation.value)),
             child: widget.child,
           ),
         );
@@ -113,7 +120,7 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
         return Opacity(
           opacity: _animation.value,
           child: Transform.translate(
-            offset: Offset(0, -30 * (1 - _animation.value)),
+            offset: Offset(0, -_animationOffset * (1 - _animation.value)),
             child: widget.child,
           ),
         );
@@ -121,7 +128,7 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
         return Opacity(
           opacity: _animation.value,
           child: Transform.translate(
-            offset: Offset(-30 * (1 - _animation.value), 0),
+            offset: Offset(-_animationOffset * (1 - _animation.value), 0),
             child: widget.child,
           ),
         );
@@ -129,7 +136,7 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
         return Opacity(
           opacity: _animation.value,
           child: Transform.translate(
-            offset: Offset(30 * (1 - _animation.value), 0),
+            offset: Offset(_animationOffset * (1 - _animation.value), 0),
             child: widget.child,
           ),
         );
@@ -137,7 +144,7 @@ class _AnimatedOnVisibleState extends State<AnimatedOnVisible>
         return Opacity(
           opacity: _animation.value,
           child: Transform.scale(
-            scale: 0.8 + (0.2 * _animation.value),
+            scale: _scaleStart + ((1.0 - _scaleStart) * _animation.value),
             child: widget.child,
           ),
         );
