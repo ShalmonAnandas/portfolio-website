@@ -38,8 +38,9 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             StaticText.aboutMe,
             style: TextStyle(
-              color: context.customColors.dutchWhite,
-              fontSize: 16,
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -54,8 +55,9 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             StaticText.myProjects,
             style: TextStyle(
-              color: context.customColors.dutchWhite,
-              fontSize: 16,
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -70,8 +72,9 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             StaticText.resume,
             style: TextStyle(
-              color: context.customColors.dutchWhite,
-              fontSize: 16,
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -86,8 +89,9 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             StaticText.blog,
             style: TextStyle(
-              color: context.customColors.dutchWhite,
-              fontSize: 16,
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -102,13 +106,27 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: context.customColors.dutchWhite,
+              gradient: LinearGradient(
+                colors: [
+                  context.customColors.primaryAccent,
+                  context.customColors.secondaryAccent,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: context.customColors.primaryAccent.withOpacity(0.3),
+                  blurRadius: 12,
+                  offset: Offset(0, 4),
+                ),
+              ],
             ),
-            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Text(
               StaticText.getInTouch,
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),

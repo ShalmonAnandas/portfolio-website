@@ -17,21 +17,32 @@ class LandscapeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: height * 0.1,
       width: width,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.black.withOpacity(0.1),
+            Colors.transparent,
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 24),
+            padding: const EdgeInsets.only(left: 32),
             child: Text(
               StaticText.shalmonAnandas,
               style: TextStyle(
                 color: headerColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 32,
+                fontWeight: FontWeight.w800,
+                fontSize: 34,
+                letterSpacing: -0.5,
               ),
             ),
           ),
