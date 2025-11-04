@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animate_on_scroll/flutter_animate_on_scroll.dart';
 import 'package:portfolio_website/utils/assets.dart';
+import 'package:portfolio_website/widgets/animated_on_visible.dart';
 
 class HomePageContent extends StatefulWidget {
   const HomePageContent({super.key, required this.height, required this.width});
@@ -25,30 +25,27 @@ class _HomePageContentState extends State<HomePageContent>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FadeInDown(
-              config: BaseAnimationConfig(
-                delay: 100.ms,
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: SizedBox(
-                    width: widget.width * 0.6,
-                    child: Image.asset(Assets.portfolioFilled),
-                  ),
+            AnimatedOnVisible(
+              delay: Duration(milliseconds: 100),
+              animationType: AnimationType.fadeInDown,
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: SizedBox(
+                  width: widget.width * 0.6,
+                  child: Image.asset(Assets.portfolioFilled),
                 ),
               ),
             ),
             ...List.generate(
               max(3, ((widget.height / widget.width) * 4).round()),
-              (index) => FadeInDown(
-                config: BaseAnimationConfig(
-                  delay: ((index + 1) * 100).ms,
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: SizedBox(
-                      width: widget.width * 0.6,
-                      child:
-                          Image.asset(Assets.portfolioOutlined),
-                    ),
+              (index) => AnimatedOnVisible(
+                delay: Duration(milliseconds: (index + 1) * 100),
+                animationType: AnimationType.fadeInDown,
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: SizedBox(
+                    width: widget.width * 0.6,
+                    child: Image.asset(Assets.portfolioOutlined),
                   ),
                 ),
               ),
