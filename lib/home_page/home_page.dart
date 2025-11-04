@@ -38,8 +38,9 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             StaticText.aboutMe,
             style: TextStyle(
-              color: context.customColors.dutchWhite,
-              fontSize: 16,
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -54,8 +55,9 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             StaticText.myProjects,
             style: TextStyle(
-              color: context.customColors.dutchWhite,
-              fontSize: 16,
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -70,8 +72,9 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             StaticText.resume,
             style: TextStyle(
-              color: context.customColors.dutchWhite,
-              fontSize: 16,
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -86,8 +89,9 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             StaticText.blog,
             style: TextStyle(
-              color: context.customColors.dutchWhite,
-              fontSize: 16,
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -102,13 +106,27 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: context.customColors.dutchWhite,
+              gradient: LinearGradient(
+                colors: [
+                  context.customColors.primaryAccent,
+                  context.customColors.secondaryAccent,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: context.customColors.primaryAccent.withOpacity(0.3),
+                  blurRadius: 12,
+                  offset: Offset(0, 4),
+                ),
+              ],
             ),
-            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Text(
               StaticText.getInTouch,
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
@@ -244,14 +262,28 @@ class HomePageBackground extends StatelessWidget {
           height: height * 0.8,
           width: width,
           decoration: BoxDecoration(
-            color: context.customColors.gunMetal,
+            gradient: LinearGradient(
+              colors: [
+                context.customColors.gunMetal,
+                context.customColors.gunMetal.withOpacity(0.95),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
           ),
         ),
         Container(
           height: height * 0.2,
           width: width,
           decoration: BoxDecoration(
-            color: Colors.black,
+            gradient: LinearGradient(
+              colors: [
+                context.customColors.gunMetal.withOpacity(0.95),
+                context.customColors.gunMetal,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -259,13 +291,16 @@ class HomePageBackground extends StatelessWidget {
               Text(
                 StaticText.scrollDown,
                 style: TextStyle(
-                    color: context.customColors.dutchWhite, fontSize: 16),
+                    color: Colors.white, 
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 10),
               Text(
                 "Discover more about me",
                 style: TextStyle(
-                    color: context.customColors.dutchWhite.withOpacity(0.7), fontSize: 14),
+                    color: Colors.white.withOpacity(0.8), 
+                    fontSize: 15),
               ),
               Lottie.asset(
                 Assets.scrollDownAnim,
@@ -279,7 +314,14 @@ class HomePageBackground extends StatelessWidget {
           height: height * 0.1,
           width: width,
           decoration: BoxDecoration(
-            color: context.customColors.dutchWhite,
+            gradient: LinearGradient(
+              colors: [
+                context.customColors.gunMetal,
+                context.customColors.dutchWhite,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
         )
       ],

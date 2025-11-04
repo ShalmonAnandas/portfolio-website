@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate_on_scroll/flutter_animate_on_scroll.dart';
 import 'package:portfolio_website/utils/colors.dart';
+import 'package:portfolio_website/widgets/animated_on_visible.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectsSection extends StatelessWidget {
@@ -8,42 +8,6 @@ class ProjectsSection extends StatelessWidget {
 
   final double height;
   final double width;
-
-  // Helper function to get randomized animation based on index
-  Widget _getRandomAnimation({
-    required int index,
-    required int delay,
-    required Widget child,
-  }) {
-    final animations = [
-      // Index 0: FadeIn
-      FadeIn(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-      // Index 1: SlideInRight
-      SlideInRight(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-      // Index 2: SlideInLeft
-      SlideInLeft(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-      // Index 3: FadeInUp
-      FadeInUp(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-      // Index 4: SlideInUp
-      SlideInUp(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-      // Index 5: FadeInDown
-      FadeInDown(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-    ];
-
-    return animations[index % animations.length];
-  }
 
   Widget _buildProjectCard({
     required BuildContext context,
@@ -56,24 +20,27 @@ class ProjectsSection extends StatelessWidget {
     required int delay,
     required IconData icon,
     required Color iconColor,
-    required int index,
   }) {
-    return _getRandomAnimation(
-      index: index,
-      delay: delay,
+    return AnimatedOnVisible(
+      delay: Duration(milliseconds: delay),
+      animationType: AnimationType.fadeInUp,
       child: Container(
-        margin: EdgeInsets.only(bottom: 24),
-        padding: EdgeInsets.all(24),
+        margin: EdgeInsets.only(bottom: 28),
+        padding: EdgeInsets.all(28),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 15,
-              offset: Offset(0, 8),
+              color: iconColor.withOpacity(0.15),
+              blurRadius: 20,
+              offset: Offset(0, 10),
             ),
           ],
+          border: Border.all(
+            color: iconColor.withOpacity(0.2),
+            width: 1,
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,82 +48,98 @@ class ProjectsSection extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.all(12),
+                  padding: EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: iconColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
+                    gradient: LinearGradient(
+                      colors: [
+                        iconColor.withOpacity(0.8),
+                        iconColor,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: iconColor.withOpacity(0.3),
+                        blurRadius: 12,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: Icon(
                     icon,
-                    color: iconColor,
-                    size: 24,
+                    color: Colors.white,
+                    size: 28,
                   ),
                 ),
-                SizedBox(width: 16),
+                SizedBox(width: 20),
                 Expanded(
                   child: Text(
                     title,
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 26,
                       fontWeight: FontWeight.w700,
                       color: context.customColors.gunMetal,
-                      letterSpacing: -0.3,
+                      letterSpacing: -0.5,
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Icon(Icons.star, color: Colors.amber, size: 16),
-                    SizedBox(width: 4),
-                    Text(
-                      stars.toString(),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: context.customColors.cadetGrey,
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: context.customColors.warningAccent.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.star, 
+                        color: context.customColors.warningAccent, 
+                        size: 18),
+                      SizedBox(width: 6),
+                      Text(
+                        stars.toString(),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: context.customColors.warningAccent,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
             Text(
               description,
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.black87,
-                height: 1.6,
+                fontSize: 17,
+                color: context.customColors.cadetGrey,
+                height: 1.7,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 20),
             Wrap(
-              spacing: 10,
-              runSpacing: 8,
+              spacing: 12,
+              runSpacing: 12,
               children: technologies
                   .map((tech) => Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              context.customColors.cadetGrey.withOpacity(0.15),
-                              context.customColors.cadetGrey.withOpacity(0.25),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
+                          color: context.customColors.dutchWhite,
+                          borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                            color:
-                                context.customColors.cadetGrey.withOpacity(0.3),
-                            width: 0.5,
+                            color: context.customColors.cadetGrey.withOpacity(0.3),
+                            width: 1.5,
                           ),
                         ),
                         child: Text(
                           tech,
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: context.customColors.gunMetal,
                           ),
@@ -164,7 +147,7 @@ class ProjectsSection extends StatelessWidget {
                       ))
                   .toList(),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 24),
             Row(
               children: [
                 GestureDetector(
@@ -173,7 +156,7 @@ class ProjectsSection extends StatelessWidget {
                     cursor: SystemMouseCursors.click,
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
@@ -183,27 +166,27 @@ class ProjectsSection extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
                             color:
                                 context.customColors.gunMetal.withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: Offset(0, 3),
+                            blurRadius: 12,
+                            offset: Offset(0, 4),
                           ),
                         ],
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.code, color: Colors.white, size: 16),
-                          SizedBox(width: 8),
+                          Icon(Icons.code, color: Colors.white, size: 18),
+                          SizedBox(width: 10),
                           Text(
-                            'GitHub',
+                            'View Code',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
-                              fontSize: 14,
+                              fontSize: 15,
                             ),
                           ),
                         ],
@@ -212,34 +195,43 @@ class ProjectsSection extends StatelessWidget {
                   ),
                 ),
                 if (liveUrl != null) ...[
-                  SizedBox(width: 12),
+                  SizedBox(width: 16),
                   GestureDetector(
                     onTap: () => _launchUrl(liveUrl),
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         decoration: BoxDecoration(
-                          border: Border.all(
-                            color: context.customColors.gunMetal,
-                            width: 2,
+                          gradient: LinearGradient(
+                            colors: [
+                              context.customColors.primaryAccent,
+                              context.customColors.secondaryAccent,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: context.customColors.primaryAccent.withOpacity(0.3),
+                              blurRadius: 12,
+                              offset: Offset(0, 4),
+                            ),
+                          ],
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.launch,
-                                color: context.customColors.gunMetal, size: 16),
-                            SizedBox(width: 8),
+                            Icon(Icons.launch, color: Colors.white, size: 18),
+                            SizedBox(width: 10),
                             Text(
                               'Live Demo',
                               style: TextStyle(
-                                color: context.customColors.gunMetal,
+                                color: Colors.white,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 14,
+                                fontSize: 15,
                               ),
                             ),
                           ],
@@ -271,44 +263,69 @@ class ProjectsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      color: context.customColors.cadetGrey.withOpacity(0.1),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            context.customColors.dutchWhite,
+            Colors.white,
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
         child: Column(
           children: [
-            FadeIn(
-              config: BaseAnimationConfig(
-                delay: 200.ms,
-                child: Text(
-                  "My Projects",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 42,
-                    color: context.customColors.gunMetal,
-                    letterSpacing: -0.5,
-                  ),
-                  textAlign: TextAlign.center,
+            AnimatedOnVisible(
+              delay: Duration(milliseconds: 100),
+              animationType: AnimationType.fadeInUp,
+              child: Text(
+                "My Projects",
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 48,
+                  color: context.customColors.gunMetal,
+                  letterSpacing: -1.0,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(height: 16),
-            SlideInUp(
-              config: BaseAnimationConfig(
-                delay: 400.ms,
-                child: Text(
-                  "A showcase of my favorite projects and contributions",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: context.customColors.cadetGrey,
+            AnimatedOnVisible(
+              delay: Duration(milliseconds: 200),
+              animationType: AnimationType.fadeIn,
+              child: Container(
+                height: 4,
+                width: 80,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      context.customColors.primaryAccent,
+                      context.customColors.secondaryAccent,
+                    ],
                   ),
-                  textAlign: TextAlign.center,
+                  borderRadius: BorderRadius.circular(2),
                 ),
               ),
             ),
-            SizedBox(height: 48),
+            SizedBox(height: 20),
+            AnimatedOnVisible(
+              delay: Duration(milliseconds: 300),
+              animationType: AnimationType.fadeInUp,
+              child: Text(
+                "A showcase of my favorite projects and contributions",
+                style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w500,
+                  color: context.customColors.cadetGrey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(height: 60),
             Container(
-              constraints: BoxConstraints(maxWidth: 1000),
+              constraints: BoxConstraints(maxWidth: 1100),
               child: Column(
                 children: [
                   _buildProjectCard(
@@ -320,10 +337,9 @@ class ProjectsSection extends StatelessWidget {
                     githubUrl:
                         "https://github.com/ShalmonAnandas/GUI-YouTube-Downloader",
                     stars: 120,
-                    delay: 600,
+                    delay: 400,
                     icon: Icons.download,
-                    iconColor: Colors.red,
-                    index: 0,
+                    iconColor: Colors.red.shade600,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -338,10 +354,9 @@ class ProjectsSection extends StatelessWidget {
                     ],
                     githubUrl: "https://github.com/ShalmonAnandas/books-api",
                     stars: 15,
-                    delay: 700,
+                    delay: 450,
                     icon: Icons.menu_book,
-                    iconColor: Colors.blue,
-                    index: 1,
+                    iconColor: Colors.blue.shade700,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -352,10 +367,9 @@ class ProjectsSection extends StatelessWidget {
                     githubUrl: "https://github.com/ShalmonAnandas/0.1-0.2-0.3",
                     liveUrl: "https://floating-point-demo.vercel.app",
                     stars: 8,
-                    delay: 800,
+                    delay: 500,
                     icon: Icons.calculate,
-                    iconColor: Colors.purple,
-                    index: 2,
+                    iconColor: Colors.purple.shade600,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -365,10 +379,9 @@ class ProjectsSection extends StatelessWidget {
                     technologies: ["Flutter", "Dart", "REST API", "Mobile"],
                     githubUrl: "https://github.com/ShalmonAnandas/movie-app",
                     stars: 25,
-                    delay: 900,
+                    delay: 550,
                     icon: Icons.movie,
-                    iconColor: Colors.orange,
-                    index: 3,
+                    iconColor: Colors.orange.shade700,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -380,10 +393,9 @@ class ProjectsSection extends StatelessWidget {
                         "https://github.com/ShalmonAnandas/interactive-games",
                     liveUrl: "https://shalmon-games.vercel.app",
                     stars: 12,
-                    delay: 1000,
+                    delay: 600,
                     icon: Icons.sports_esports,
-                    iconColor: Colors.green,
-                    index: 4,
+                    iconColor: Colors.green.shade600,
                   ),
                   _buildProjectCard(
                     context: context,
@@ -395,10 +407,9 @@ class ProjectsSection extends StatelessWidget {
                         "https://github.com/ShalmonAnandas/emotions-and-tech-tips",
                     liveUrl: "https://emotions-and-tech-tips.vercel.app",
                     stars: 5,
-                    delay: 1100,
+                    delay: 650,
                     icon: Icons.article,
-                    iconColor: Colors.teal,
-                    index: 5,
+                    iconColor: Colors.teal.shade600,
                   ),
                 ],
               ),

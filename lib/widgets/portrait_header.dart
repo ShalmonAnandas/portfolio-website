@@ -16,9 +16,19 @@ class PortraitHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: height * 0.1,
       width: width,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.black.withOpacity(0.1),
+            Colors.transparent,
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -47,8 +57,9 @@ class PortraitHeader extends StatelessWidget {
               StaticText.shalmonAnandas,
               style: TextStyle(
                 color: headerColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 32,
+                fontWeight: FontWeight.w800,
+                fontSize: 34,
+                letterSpacing: -0.5,
               ),
             ),
           ),

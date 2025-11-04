@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate_on_scroll/flutter_animate_on_scroll.dart';
 import 'package:portfolio_website/utils/colors.dart';
+import 'package:portfolio_website/widgets/animated_on_visible.dart';
 
 class WorkExperienceSection extends StatelessWidget {
   const WorkExperienceSection(
@@ -8,34 +8,6 @@ class WorkExperienceSection extends StatelessWidget {
 
   final double height;
   final double width;
-
-  // Helper function to get randomized animation based on index
-  Widget _getRandomAnimation({
-    required int index,
-    required int delay,
-    required Widget child,
-  }) {
-    final animations = [
-      // Index 0: FadeInUp
-      FadeInUp(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-      // Index 1: SlideInLeft
-      SlideInLeft(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-      // Index 2: SlideInRight
-      SlideInRight(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-      // Index 3: FadeIn
-      FadeIn(
-          config: BaseAnimationConfig(
-              delay: Duration(milliseconds: delay), child: child)),
-    ];
-
-    return animations[index % animations.length];
-  }
 
   Widget _buildExperienceCard({
     required BuildContext context,
@@ -49,40 +21,39 @@ class WorkExperienceSection extends StatelessWidget {
     String? note,
     required int delay,
     required bool isLatest,
-    required int index,
   }) {
-    return _getRandomAnimation(
-      index: index,
-      delay: delay,
+    return AnimatedOnVisible(
+      delay: Duration(milliseconds: delay),
+      animationType: AnimationType.fadeInUp,
       child: Container(
-        margin: EdgeInsets.only(bottom: 24),
-        padding: EdgeInsets.all(24),
+        margin: EdgeInsets.only(bottom: 28),
+        padding: EdgeInsets.all(28),
         decoration: BoxDecoration(
           gradient: isLatest
               ? LinearGradient(
                   colors: [
-                    context.customColors.gunMetal,
-                    context.customColors.gunMetal.withOpacity(0.9),
+                    context.customColors.primaryAccent,
+                    context.customColors.secondaryAccent,
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 )
               : null,
           color: isLatest ? null : Colors.white,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(20),
           border: isLatest
               ? null
               : Border.all(
-                  color: context.customColors.gunMetal.withOpacity(0.15),
+                  color: context.customColors.cadetGrey.withOpacity(0.2),
                   width: 1.5,
                 ),
           boxShadow: [
             BoxShadow(
               color: isLatest
-                  ? context.customColors.gunMetal.withOpacity(0.25)
+                  ? context.customColors.primaryAccent.withOpacity(0.3)
                   : Colors.black.withOpacity(0.08),
-              blurRadius: isLatest ? 20 : 12,
-              offset: Offset(0, isLatest ? 8 : 4),
+              blurRadius: isLatest ? 25 : 15,
+              offset: Offset(0, isLatest ? 10 : 5),
             ),
           ],
         ),
@@ -92,22 +63,22 @@ class WorkExperienceSection extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: isLatest
-                        ? context.customColors.dutchWhite.withOpacity(0.2)
-                        : context.customColors.gunMetal.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                        ? Colors.white.withOpacity(0.2)
+                        : context.customColors.primaryAccent.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
-                    Icons.work,
+                    Icons.work_outline,
                     color: isLatest
-                        ? context.customColors.dutchWhite
-                        : context.customColors.gunMetal,
-                    size: 20,
+                        ? Colors.white
+                        : context.customColors.primaryAccent,
+                    size: 24,
                   ),
                 ),
-                SizedBox(width: 12),
+                SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,22 +86,22 @@ class WorkExperienceSection extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 26,
                           fontWeight: FontWeight.w700,
                           color: isLatest
-                              ? context.customColors.dutchWhite
+                              ? Colors.white
                               : context.customColors.gunMetal,
-                          letterSpacing: -0.3,
+                          letterSpacing: -0.5,
                         ),
                       ),
                       SizedBox(height: 6),
                       Text(
                         company,
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 19,
                           fontWeight: FontWeight.w600,
                           color: isLatest
-                              ? context.customColors.dutchWhite.withOpacity(0.9)
+                              ? Colors.white.withOpacity(0.95)
                               : context.customColors.cadetGrey,
                         ),
                       ),
@@ -139,93 +110,104 @@ class WorkExperienceSection extends StatelessWidget {
                 ),
                 if (isLatest)
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                     decoration: BoxDecoration(
-                      color: context.customColors.dutchWhite,
-                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
                     ),
                     child: Text(
                       'Current',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
-                        color: context.customColors.gunMetal,
+                        color: context.customColors.primaryAccent,
                       ),
                     ),
                   ),
               ],
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 16),
             Row(
               children: [
                 Icon(
-                  Icons.calendar_today,
-                  size: 16,
+                  Icons.calendar_today_outlined,
+                  size: 18,
                   color: isLatest
-                      ? context.customColors.dutchWhite.withOpacity(0.8)
+                      ? Colors.white.withOpacity(0.9)
                       : context.customColors.cadetGrey,
                 ),
-                SizedBox(width: 8),
+                SizedBox(width: 10),
                 Text(
                   "$period • $duration",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
                     color: isLatest
-                        ? context.customColors.dutchWhite.withOpacity(0.8)
+                        ? Colors.white.withOpacity(0.9)
                         : context.customColors.cadetGrey,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 10),
             Row(
               children: [
                 Icon(
-                  Icons.location_on,
-                  size: 16,
+                  Icons.location_on_outlined,
+                  size: 18,
                   color: isLatest
-                      ? context.customColors.dutchWhite.withOpacity(0.8)
+                      ? Colors.white.withOpacity(0.9)
                       : context.customColors.cadetGrey,
                 ),
-                SizedBox(width: 8),
-                Text(
-                  "$location • $type",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: isLatest
-                        ? context.customColors.dutchWhite.withOpacity(0.8)
-                        : context.customColors.cadetGrey,
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "$location • $type",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: isLatest
+                          ? Colors.white.withOpacity(0.9)
+                          : context.customColors.cadetGrey,
+                    ),
                   ),
                 ),
               ],
             ),
             if (note != null) ...[
-              SizedBox(height: 12),
+              SizedBox(height: 16),
               Container(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   color: isLatest
-                      ? context.customColors.dutchWhite.withOpacity(0.1)
-                      : context.customColors.cadetGrey.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8),
+                      ? Colors.white.withOpacity(0.15)
+                      : context.customColors.dutchWhite,
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
                     Icon(
                       Icons.info_outline,
-                      size: 16,
+                      size: 18,
                       color: isLatest
-                          ? context.customColors.dutchWhite
-                          : context.customColors.cadetGrey,
+                          ? Colors.white
+                          : context.customColors.primaryAccent,
                     ),
-                    SizedBox(width: 8),
+                    SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         note,
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 14,
                           color: isLatest
-                              ? context.customColors.dutchWhite
+                              ? Colors.white.withOpacity(0.95)
                               : context.customColors.cadetGrey,
                           fontStyle: FontStyle.italic,
                         ),
@@ -236,52 +218,45 @@ class WorkExperienceSection extends StatelessWidget {
               ),
             ],
             if (skills.isNotEmpty) ...[
-              SizedBox(height: 16),
+              SizedBox(height: 20),
               Text(
                 "Key Skills:",
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600,
                   color: isLatest
-                      ? context.customColors.dutchWhite
+                      ? Colors.white
                       : context.customColors.gunMetal,
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 12),
               Wrap(
-                spacing: 10,
-                runSpacing: 8,
+                spacing: 12,
+                runSpacing: 12,
                 children: skills
                     .map((skill) => Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                           decoration: BoxDecoration(
                             color: isLatest
-                                ? context.customColors.dutchWhite
-                                    .withOpacity(0.2)
-                                : context.customColors.gunMetal
-                                    .withOpacity(0.08),
-                            borderRadius: BorderRadius.circular(12),
-                            border: isLatest
-                                ? Border.all(
-                                    color: context.customColors.dutchWhite
-                                        .withOpacity(0.3),
-                                    width: 0.5,
-                                  )
-                                : Border.all(
-                                    color: context.customColors.gunMetal
-                                        .withOpacity(0.2),
-                                    width: 0.5,
-                                  ),
+                                ? Colors.white.withOpacity(0.2)
+                                : context.customColors.primaryAccent.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: isLatest
+                                  ? Colors.white.withOpacity(0.3)
+                                  : context.customColors.primaryAccent.withOpacity(0.3),
+                              width: 1,
+                            ),
                           ),
                           child: Text(
                             skill,
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: isLatest
-                                  ? context.customColors.dutchWhite
-                                  : context.customColors.gunMetal,
+                                  ? Colors.white
+                                  : context.customColors.primaryAccent,
                             ),
                           ),
                         ))
@@ -300,51 +275,48 @@ class WorkExperienceSection extends StatelessWidget {
     required String institution,
     required String period,
     required int delay,
-    required int index,
   }) {
-    return _getRandomAnimation(
-      index: index,
-      delay: delay,
+    return AnimatedOnVisible(
+      delay: Duration(milliseconds: delay),
+      animationType: AnimationType.fadeInUp,
       child: Container(
-        margin: EdgeInsets.only(bottom: 16),
-        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.only(bottom: 20),
+        padding: EdgeInsets.all(24),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              context.customColors.cadetGrey.withOpacity(0.08),
-              context.customColors.cadetGrey.withOpacity(0.15),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
           border: Border.all(
             color: context.customColors.cadetGrey.withOpacity(0.2),
-            width: 1,
+            width: 1.5,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 8,
-              offset: Offset(0, 3),
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 12,
+              offset: Offset(0, 4),
             ),
           ],
         ),
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: context.customColors.gunMetal.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
+                gradient: LinearGradient(
+                  colors: [
+                    context.customColors.successAccent,
+                    context.customColors.successAccent.withOpacity(0.8),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
-                Icons.school,
-                color: context.customColors.gunMetal,
-                size: 20,
+                Icons.school_outlined,
+                color: Colors.white,
+                size: 24,
               ),
             ),
-            SizedBox(width: 16),
+            SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -352,26 +324,37 @@ class WorkExperienceSection extends StatelessWidget {
                   Text(
                     degree,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 19,
                       fontWeight: FontWeight.bold,
                       color: context.customColors.gunMetal,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  SizedBox(height: 6),
                   Text(
                     institution,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 17,
                       color: context.customColors.cadetGrey,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    period,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: context.customColors.cadetGrey,
-                    ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.calendar_today_outlined,
+                        size: 16,
+                        color: context.customColors.cadetGrey,
+                      ),
+                      SizedBox(width: 6),
+                      Text(
+                        period,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: context.customColors.cadetGrey,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -386,44 +369,69 @@ class WorkExperienceSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      color: context.customColors.dutchWhite,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.white,
+            context.customColors.dutchWhite,
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 48.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
         child: Column(
           children: [
-            FadeIn(
-              config: BaseAnimationConfig(
-                delay: 200.ms,
-                child: Text(
-                  "My Work Experience",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 42,
-                    color: context.customColors.gunMetal,
-                    letterSpacing: -0.5,
-                  ),
-                  textAlign: TextAlign.center,
+            AnimatedOnVisible(
+              delay: Duration(milliseconds: 100),
+              animationType: AnimationType.fadeInUp,
+              child: Text(
+                "My Work Experience",
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 48,
+                  color: context.customColors.gunMetal,
+                  letterSpacing: -1.0,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(height: 16),
-            SlideInUp(
-              config: BaseAnimationConfig(
-                delay: 400.ms,
-                child: Text(
-                  "Professional journey and career milestones",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: context.customColors.cadetGrey,
+            AnimatedOnVisible(
+              delay: Duration(milliseconds: 200),
+              animationType: AnimationType.fadeIn,
+              child: Container(
+                height: 4,
+                width: 80,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      context.customColors.primaryAccent,
+                      context.customColors.secondaryAccent,
+                    ],
                   ),
-                  textAlign: TextAlign.center,
+                  borderRadius: BorderRadius.circular(2),
                 ),
               ),
             ),
-            SizedBox(height: 48),
+            SizedBox(height: 20),
+            AnimatedOnVisible(
+              delay: Duration(milliseconds: 300),
+              animationType: AnimationType.fadeInUp,
+              child: Text(
+                "Professional journey and career milestones",
+                style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w500,
+                  color: context.customColors.cadetGrey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(height: 60),
             Container(
-              constraints: BoxConstraints(maxWidth: 800),
+              constraints: BoxConstraints(maxWidth: 900),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -431,13 +439,13 @@ class WorkExperienceSection extends StatelessWidget {
                   Text(
                     "Professional Experience",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 32,
                       fontWeight: FontWeight.w700,
                       color: context.customColors.gunMetal,
-                      letterSpacing: -0.3,
+                      letterSpacing: -0.5,
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 32),
                   _buildExperienceCard(
                     context: context,
                     title: "Flutter Developer",
@@ -447,9 +455,8 @@ class WorkExperienceSection extends StatelessWidget {
                     location: "On-site",
                     type: "Full-time",
                     skills: ["Flutter", "Dart", "Mobile Development"],
-                    delay: 600,
+                    delay: 400,
                     isLatest: true,
-                    index: 0,
                   ),
                   _buildExperienceCard(
                     context: context,
@@ -462,9 +469,8 @@ class WorkExperienceSection extends StatelessWidget {
                     skills: ["Software Development", "Team Leadership"],
                     note:
                         "Working at Snapwork Technologies as a deputed developer on behalf of Puretech.",
-                    delay: 700,
+                    delay: 450,
                     isLatest: false,
-                    index: 1,
                   ),
                   _buildExperienceCard(
                     context: context,
@@ -478,9 +484,8 @@ class WorkExperienceSection extends StatelessWidget {
                       "Red Hat Enterprise Linux (RHEL)",
                       "Linux System Administration"
                     ],
-                    delay: 800,
+                    delay: 500,
                     isLatest: false,
-                    index: 2,
                   ),
                   _buildExperienceCard(
                     context: context,
@@ -495,39 +500,36 @@ class WorkExperienceSection extends StatelessWidget {
                       "Python (Programming Language)",
                       "Logical Volume Manager (LVM)"
                     ],
-                    delay: 900,
+                    delay: 550,
                     isLatest: false,
-                    index: 3,
                   ),
 
-                  SizedBox(height: 48),
+                  SizedBox(height: 60),
 
                   // Education Section
                   Text(
                     "Education",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 32,
                       fontWeight: FontWeight.w700,
                       color: context.customColors.gunMetal,
-                      letterSpacing: -0.3,
+                      letterSpacing: -0.5,
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 32),
                   _buildEducationCard(
                     context: context,
                     degree: "Master of Science in Computer Science",
                     institution: "University of Mumbai",
                     period: "2021 - 2023",
-                    delay: 1000,
-                    index: 0,
+                    delay: 600,
                   ),
                   _buildEducationCard(
                     context: context,
                     degree: "Bachelor of Science in Computer Science",
                     institution: "University of Mumbai",
                     period: "2018 - 2021",
-                    delay: 1100,
-                    index: 1,
+                    delay: 650,
                   ),
                 ],
               ),
